@@ -1,17 +1,17 @@
 "use client";
 
 import { Box, Container, Typography, useTheme } from "@mui/material";
-import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
-import SmartphoneOutlinedIcon from "@mui/icons-material/SmartphoneOutlined";
-import SyncAltOutlinedIcon from "@mui/icons-material/SyncAltOutlined";
+import TranslateOutlinedIcon from "@mui/icons-material/TranslateOutlined";
+import QrCodeOutlinedIcon from "@mui/icons-material/QrCodeOutlined";
+import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 const accentOrange = "#ff7a00";
 
 const featureIcons = [
-  { icon: PublicOutlinedIcon, iconColor: "#E11D48" },
-  { icon: SmartphoneOutlinedIcon, iconColor: "#34d399" },
-  { icon: SyncAltOutlinedIcon, iconColor: accentOrange },
+  { icon: TranslateOutlinedIcon, iconColor: "#E11D48" },
+  { icon: QrCodeOutlinedIcon, iconColor: "#34d399" },
+  { icon: ConfirmationNumberOutlinedIcon, iconColor: accentOrange },
 ];
 
 export function GlobalSupportSection() {

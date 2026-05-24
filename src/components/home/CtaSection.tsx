@@ -29,7 +29,7 @@ function FeatureTick({ isDark }: { isDark: boolean }) {
         fontSize: 14,
         flexShrink: 0,
         mt: "2px",
-        color: isDark ? "#F472B6" : "#E11D48",
+        color: isDark ? "#94a3b8" : "#333333",
       }}
     />
   );
@@ -120,32 +120,78 @@ export function CtaSection() {
                       ? "0 8px 28px rgba(0,0,0,0.22)"
                       : "0 10px 36px -10px rgba(15,23,42,0.08)",
                   textAlign: "left",
+                  position: "relative",
+                  ...(plan.comingSoon && {
+                    opacity: 0.9,
+                  }),
                 }}
               >
-                <Typography
-                  sx={{
-                    display: "inline-block",
-                    alignSelf: "flex-start",
-                    px: 1.25,
-                    py: 0.35,
-                    borderRadius: "6px",
-                    fontSize: 11,
-                    fontWeight: 800,
-                    letterSpacing: "0.07em",
-                    textTransform: "uppercase",
-                    color: labelColor,
-                    bgcolor: isDark ? "rgba(251,113,133,0.12)" : "rgba(225,29,72,0.07)",
-                    border: isDark ? "1px solid rgba(244,114,182,0.22)" : "1px solid rgba(225,29,72,0.12)",
-                  }}
-                >
-                  {plan.badge}
-                </Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", mb: 1, flexWrap: "wrap", gap: 1 }}>
+                  <Box sx={{ display: "flex", gap: 1, alignItems: "center", flexWrap: "wrap" }}>
+                    <Typography
+                      sx={{
+                        display: "inline-block",
+                        px: 1.25,
+                        py: 0.35,
+                        borderRadius: "6px",
+                        fontSize: 11,
+                        fontWeight: 800,
+                        letterSpacing: "0.07em",
+                        textTransform: "uppercase",
+                        color: labelColor,
+                        bgcolor: isDark ? "rgba(251,113,133,0.12)" : "rgba(225,29,72,0.07)",
+                        border: isDark ? "1px solid rgba(244,114,182,0.22)" : "1px solid rgba(225,29,72,0.12)",
+                      }}
+                    >
+                      {plan.badge}
+                    </Typography>
+
+                    {index === 0 ? (
+                      <Typography
+                        sx={{
+                          display: "inline-block",
+                          px: 1.25,
+                          py: 0.35,
+                          borderRadius: "6px",
+                          fontSize: 11,
+                          fontWeight: 800,
+                          letterSpacing: "0.07em",
+                          textTransform: "uppercase",
+                          color: isDark ? "#34D399" : "#059669",
+                          bgcolor: isDark ? "rgba(52,211,153,0.12)" : "rgba(5,150,105,0.07)",
+                          border: isDark ? "1px solid rgba(52,211,153,0.22)" : "1px solid rgba(5,150,105,0.12)",
+                        }}
+                      >
+                        {t.cta.startHereLabel}
+                      </Typography>
+                    ) : null}
+                  </Box>
+
+                  {plan.comingSoon ? (
+                    <Typography
+                      sx={{
+                        fontSize: 10,
+                        fontWeight: 800,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: isDark ? "#A78BFA" : "#6D28D9",
+                        bgcolor: isDark ? "rgba(167,139,250,0.15)" : "rgba(109,40,217,0.08)",
+                        border: isDark ? "1px solid rgba(167,139,250,0.3)" : "1px solid rgba(109,40,217,0.2)",
+                        px: 1.25,
+                        py: 0.35,
+                        borderRadius: "6px",
+                      }}
+                    >
+                      {t.cta.comingSoonLabel}
+                    </Typography>
+                  ) : null}
+                </Box>
 
                 <Typography sx={{ mt: 2, fontWeight: 700, fontSize: { xs: 18, md: 20 }, color: "text.primary", lineHeight: 1.25 }}>
                   {plan.name}
                 </Typography>
 
-                <Box sx={{ mt: 2, minHeight: { xs: 92, md: 100 } }}>
+                <Box sx={{ mt: 2, minHeight: { xs: 72, md: 80 } }}>
                   <Box sx={{ display: "flex", alignItems: "baseline", flexWrap: "wrap", gap: 0.5 }}>
                     <Typography sx={{ fontSize: { xs: "2rem", md: "2.25rem" }, fontWeight: 700, color: "text.primary", lineHeight: 1 }}>
                       {plan.price}
@@ -160,54 +206,45 @@ export function CtaSection() {
                     >
                       {plan.priceUnit}
                     </Typography>
+                    {"priceNote" in plan && plan.priceNote ? (
+                      <Typography component="span" sx={{ ml: 0.5, fontSize: 13, fontWeight: 500, color: "text.secondary" }}>
+                        {plan.priceNote}
+                      </Typography>
+                    ) : null}
                   </Box>
-                  {"priceNote" in plan && plan.priceNote ? (
-                    <Typography sx={{ mt: 0.5, fontSize: 13, fontWeight: 500, color: "text.secondary", lineHeight: 1.3 }}>
-                      {plan.priceNote}
-                    </Typography>
-                  ) : null}
                   {"setupFee" in plan && plan.setupFee ? (
                     <Box
                       sx={{
-                        mt: 1.25,
+                        mt: 0.75,
                         display: "flex",
                         alignItems: "center",
                         flexWrap: "wrap",
-                        gap: 0.75,
-                        px: 1.25,
-                        py: 0.9,
-                        borderRadius: "10px",
-                        bgcolor: isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(15, 23, 42, 0.025)",
-                        border: isDark
-                          ? "1px dashed rgba(255, 255, 255, 0.14)"
-                          : "1px dashed rgba(15, 23, 42, 0.14)",
+                        columnGap: 0.75,
+                        rowGap: 0.25,
                       }}
                     >
-                      <Typography component="span" sx={{ fontSize: 14, fontWeight: 600, color: "text.secondary" }}>
-                        {plan.setupFee.prefix}
-                      </Typography>
-                      <Typography component="span" sx={{ fontSize: 16, fontWeight: 700, color: "text.primary", letterSpacing: "-0.01em" }}>
-                        {plan.setupFee.amount}
+                      <Typography component="span" sx={{ fontSize: 13.5, fontWeight: 600, color: "text.secondary" }}>
+                        {plan.setupFee.prefix}{plan.setupFee.amount}
                       </Typography>
                       <Box
                         component="span"
                         sx={{
-                          px: 0.85,
-                          py: 0.25,
-                          borderRadius: "5px",
-                          fontSize: 10,
+                          px: 0.75,
+                          py: 0.15,
+                          borderRadius: "4px",
+                          fontSize: 9,
                           fontWeight: 800,
-                          letterSpacing: "0.08em",
+                          letterSpacing: "0.06em",
                           textTransform: "uppercase",
                           lineHeight: 1.2,
-                          color: isDark ? "#FCD34D" : "#92400E",
-                          bgcolor: isDark ? "rgba(251, 191, 36, 0.16)" : "rgba(245, 158, 11, 0.14)",
-                          border: isDark ? "1px solid rgba(251, 191, 36, 0.35)" : "1px solid rgba(245, 158, 11, 0.35)",
+                          color: isDark ? "#FCD34D" : "#B45309",
+                          bgcolor: isDark ? "rgba(251, 191, 36, 0.12)" : "rgba(245, 158, 11, 0.1)",
+                          border: isDark ? "1px solid rgba(251, 191, 36, 0.25)" : "1px solid rgba(245, 158, 11, 0.25)",
                         }}
                       >
                         {plan.setupFee.badge}
                       </Box>
-                      <Typography component="span" sx={{ fontSize: 12.5, fontWeight: 500, color: "text.secondary", lineHeight: 1.35 }}>
+                      <Typography component="span" sx={{ fontSize: 12.5, fontWeight: 500, color: "text.secondary" }}>
                         {plan.setupFee.label}
                       </Typography>
                     </Box>
@@ -279,16 +316,46 @@ export function CtaSection() {
 
                 <Button
                   fullWidth
-                  variant={plan.ctaVariant === "primary" ? "contained" : "outlined"}
+                  variant={plan.comingSoon ? "contained" : (plan.ctaVariant === "primary" ? "contained" : "outlined")}
+                  disabled={plan.comingSoon}
                   onClick={() => setIsModalOpen(true)}
                   sx={{
                     mt: 2.25,
                     flexShrink: 0,
                     ...(plan.ctaVariant === "primary" ? primaryCtaSx(isDark) : secondaryCtaSx(isDark)),
+                    ...(plan.comingSoon && {
+                      cursor: "not-allowed",
+                      opacity: 0.5,
+                      background: isDark
+                        ? "linear-gradient(90deg, #F472B6 0%, #FB923C 100%) !important"
+                        : "linear-gradient(90deg, #EC4899 0%, #F97316 100%) !important",
+                      color: "#ffffff !important",
+                      "&.Mui-disabled": {
+                        background: isDark
+                          ? "linear-gradient(90deg, #F472B6 0%, #FB923C 100%) !important"
+                          : "linear-gradient(90deg, #EC4899 0%, #F97316 100%) !important",
+                        color: "#ffffff !important",
+                      }
+                    })
                   }}
                 >
                   {plan.ctaLabel}
                 </Button>
+
+                {"trialSubtext" in plan && plan.trialSubtext ? (
+                  <Typography
+                    sx={{
+                      mt: 1.25,
+                      fontSize: 12,
+                      fontWeight: 500,
+                      color: "text.secondary",
+                      textAlign: "center",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {plan.trialSubtext}
+                  </Typography>
+                ) : null}
               </Box>
             );
           })}

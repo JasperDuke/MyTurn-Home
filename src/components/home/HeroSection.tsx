@@ -11,7 +11,11 @@ import {
 } from "@mui/material";
 import { BookDemoModal } from "@/components/home/BookDemoModal";
 import { ProductShot } from "@/components/home/ProductShot";
-import { primaryCtaSx, secondaryCtaSx, SECTION_PX } from "@/components/home/styles";
+import {
+  primaryCtaSx,
+  secondaryCtaSx,
+  SECTION_PX,
+} from "@/components/home/styles";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { scrollToSection } from "@/lib/scroll";
 import { motion, Variants } from "framer-motion";
@@ -20,13 +24,17 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
 };
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 },
+  },
 };
 
 export function HeroSection() {
@@ -75,8 +83,8 @@ export function HeroSection() {
             width: { xs: 400, md: 600 },
             height: { xs: 400, md: 600 },
             borderRadius: "50%",
-            background: isDark 
-              ? "radial-gradient(circle, rgba(244,114,182,0.15) 0%, transparent 70%)" 
+            background: isDark
+              ? "radial-gradient(circle, rgba(244,114,182,0.15) 0%, transparent 70%)"
               : "radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
@@ -96,8 +104,8 @@ export function HeroSection() {
             width: { xs: 500, md: 700 },
             height: { xs: 500, md: 700 },
             borderRadius: "50%",
-            background: isDark 
-              ? "radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%)" 
+            background: isDark
+              ? "radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%)"
               : "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
@@ -117,8 +125,8 @@ export function HeroSection() {
             width: 300,
             height: 300,
             borderRadius: "50%",
-            background: isDark 
-              ? "radial-gradient(circle, rgba(251,146,60,0.1) 0%, transparent 70%)" 
+            background: isDark
+              ? "radial-gradient(circle, rgba(251,146,60,0.1) 0%, transparent 70%)"
               : "radial-gradient(circle, rgba(249,115,22,0.06) 0%, transparent 70%)",
             filter: "blur(50px)",
           }}
@@ -128,8 +136,8 @@ export function HeroSection() {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: { xs: 6, lg: 10 },
+            gridTemplateColumns: { xs: "1fr", lg: "44fr 56fr" },
+            gap: { xs: 6, lg: 8 },
             alignItems: "center",
           }}
         >
@@ -152,18 +160,24 @@ export function HeroSection() {
                 py: 0.75,
                 borderRadius: "999px",
                 bgcolor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
-                border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.06)",
+                border: isDark
+                  ? "1px solid rgba(255,255,255,0.1)"
+                  : "1px solid rgba(0,0,0,0.06)",
                 mb: 3,
                 cursor: "pointer",
                 transition: "all 0.2s ease",
                 "&:hover": {
-                  bgcolor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+                  bgcolor: isDark
+                    ? "rgba(255,255,255,0.08)"
+                    : "rgba(0,0,0,0.05)",
                   transform: "translateY(-1px)",
-                }
+                },
               }}
             >
-              <Typography sx={{ fontSize: 13, fontWeight: 600, color: "text.primary" }}>
-                {t.hero.trialBadge}
+              <Typography
+                sx={{ fontSize: 13, fontWeight: 600, color: "text.primary" }}
+              >
+                🚀 {t.hero.trialBadge}
               </Typography>
             </Box>
 
@@ -282,7 +296,13 @@ export function HeroSection() {
             component={motion.div}
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 200, damping: 25 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.3,
+              type: "spring",
+              stiffness: 200,
+              damping: 25,
+            }}
             sx={{
               position: "relative",
               minWidth: 0,
@@ -300,8 +320,8 @@ export function HeroSection() {
                 maxWidth: "100%",
                 mx: "auto",
                 transform: {
-                  xs: "translateY(-2%)",
-                  lg: "translateY(-4%)",
+                  xs: "translateY(-8%)",
+                  lg: "translateY(-22%)",
                 },
               }}
             >
@@ -325,9 +345,9 @@ export function HeroSection() {
             <Box
               sx={{
                 position: "absolute",
-                right: { xs: 0, md: 8, lg: 12 },
-                bottom: { xs: -12, md: 56 },
-                width: { xs: 118, sm: 144, md: 160 },
+                right: { xs: 0, sm: -16, md: -24, lg: -36 },
+                bottom: { xs: -12, sm: 24, md: 40, lg: 44 },
+                width: { xs: 118, sm: 126, md: 140 },
                 display: { xs: "none", sm: "block" },
               }}
             >
@@ -337,19 +357,47 @@ export function HeroSection() {
                   "@media (prefers-reduced-motion: reduce)": {
                     animation: "none",
                   },
+                  position: "relative",
+                  borderRadius: "28px",
+                  py: 2,
+                  border: "1px solid #09090b",
+                  outline: "1px solid #27272a",
+                  bgcolor: "#F4F9F9",
+                  boxShadow:
+                    "0 25px 50px -12px rgba(0,0,0,0.35), inset 0 0 2px rgba(255,255,255,0.2)",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  aspectRatio: "9 / 19.5",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: "6px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "36px",
+                    height: "11px",
+                    borderRadius: "6px",
+                    backgroundColor: "#09090b",
+                    zIndex: 10,
+                  },
                 }}
               >
                 <ProductShot
                   src="/assets/mobile-2.png"
                   alt="Customer mobile screen showing it is their turn"
-                  naturalSize
-                  objectFit="contain"
+                  naturalSize={false}
+                  aspectRatio="9 / 19.5"
+                  objectFit="cover"
                   sx={{
                     border: "none",
                     bgcolor: "transparent",
                     boxShadow: "none",
                     borderRadius: 0,
-                    overflow: "visible",
+                    overflow: "hidden",
+                    display: "block",
+                    width: "100%",
+                    height: "100%",
                   }}
                 />
               </Box>

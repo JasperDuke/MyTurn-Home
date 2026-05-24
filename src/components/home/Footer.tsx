@@ -9,9 +9,9 @@ const FOOTER_LINK_HREFS: Record<string, string> = {
   "About Us": "/about",
   Contact: "/#contact",
   "Privacy Policy": "/privacy",
-  "นโยบายความเป็นส่วนตัว": "/privacy",
-  "เกี่ยวกับเรา": "/about",
-  "ติดต่อเรา": "/#contact",
+  นโยบายความเป็นส่วนตัว: "/privacy",
+  เกี่ยวกับเรา: "/about",
+  ติดต่อเรา: "/#contact",
 };
 
 const FOOTER_LEGAL_HREFS: Record<string, string> = {
@@ -81,7 +81,7 @@ export function Footer() {
             </Typography>
             <Box sx={{ mt: 2.5 }}>
               <Link
-                href={process.env.NEXT_PUBLIC_HAWDI_URL || "#"}
+                href={"#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{

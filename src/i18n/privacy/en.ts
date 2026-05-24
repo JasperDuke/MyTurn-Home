@@ -23,7 +23,8 @@ export const privacyEn: PrivacyPolicyDictionary = {
             "Queue registration",
             "QR code queue access",
             "Real-time wait tracking",
-            "SMS, LINE, email, or app notifications",
+            "LINE & Telegram notifications for End Users",
+            "Email invitations and login for Business Client staff",
             "Reservation and booking management",
             "Analytics and operational insights",
             "Customer support services",
@@ -65,16 +66,13 @@ export const privacyEn: PrivacyPolicyDictionary = {
                 "Login credentials",
               ],
             },
-            { type: "h3", text: "From End Users" },
+            { type: "h3", text: "From End Users (Only collected if the user explicitly opts-in by connecting their LINE or Telegram account):" },
             {
               type: "ul",
               items: [
                 "Name or nickname",
-                "Phone number",
-                "LINE ID or messaging identifier",
-                "Email address",
-                "Queue preferences",
-                "Reservation details",
+                "LINE ID or Telegram identifier",
+                "(Note: If an End User does not connect a messaging app, they remain fully anonymous in our system).",
               ],
             },
           ],
@@ -133,6 +131,7 @@ export const privacyEn: PrivacyPolicyDictionary = {
             "Billing and payment processing",
             "Legal and regulatory compliance",
             "Statistical analysis and reporting",
+            "Algorithmic Optimization: Anonymizing and aggregating operational data (such as party sizes, wait times, and venue context) to train our algorithms, predict queue behaviors, and generate statistical insights. Once anonymized, this mathematical data can no longer identify an individual and is exempt from PDPA deletion requests.",
           ],
         },
         {
@@ -235,7 +234,7 @@ export const privacyEn: PrivacyPolicyDictionary = {
     },
     {
       number: 8,
-      title: "Data Retention",
+      title: "Data Retention & Deletion",
       blocks: [
         {
           type: "p",
@@ -252,7 +251,7 @@ export const privacyEn: PrivacyPolicyDictionary = {
         },
         {
           type: "p",
-          text: "When retention is no longer necessary, personal data will be securely deleted, anonymized, or destroyed.",
+          text: "Data Anonymization & Deletion: For End Users who opt-in, personally identifiable information (such as Names, LINE IDs, or Telegram IDs) is retained to allow the Business Client to track return visits, queue history, and customer loyalty. This data is retained for as long as the Business Client requires it for these CRM purposes, or until the End User explicitly requests deletion. Upon a valid deletion request, the personal data is soft-deleted (replaced with NULL values). We permanently retain only non-identifiable, mathematical traffic data for our own algorithmic training and platform optimization.",
         },
       ],
     },
@@ -312,6 +311,10 @@ export const privacyEn: PrivacyPolicyDictionary = {
       number: 11,
       title: "Business Client Responsibilities",
       blocks: [
+        {
+          type: "p",
+          text: "HawDi Technologies acts strictly as a Data Processor on behalf of the Business Client. We do not control how the Business Client chooses to interact with End Users. All End User requests regarding data deletion, access, or consent withdrawal must be directed to the respective Business Client (the restaurant or venue).",
+        },
         {
           type: "p",
           text: "Where Business Clients collect personal data from their own customers using our Platform, the Business Client acts as the data controller for such customer data.",
@@ -375,11 +378,9 @@ export const privacyEn: PrivacyPolicyDictionary = {
           type: "p",
           text: "If you have questions regarding this Privacy Policy or wish to exercise your rights under the PDPA, please contact:",
         },
-        { type: "h3", text: "HawDi Technologies" },
-        { type: "p", text: "Email: privacy@hawdi.tech" },
-        { type: "p", text: "Address: Bangkok, Thailand" },
-        { type: "h3", text: "Data Protection Officer (DPO)" },
-        { type: "p", text: "Email: dpo@hawdi.tech" },
+        { type: "h3", text: "MyTurn Support" },
+        { type: "p", text: "Email: support@findmyturn.com" },
+        { type: "p", text: "Address: Bangkok, Thailand (Head Office)" },
       ],
     },
     {

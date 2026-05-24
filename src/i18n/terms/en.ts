@@ -418,8 +418,8 @@ export const termsEn: TermsOfUseDictionary = {
       title: "Contact Information",
       blocks: [
         { type: "h3", text: "HawDi Technologies" },
-        { type: "p", text: "Email: support@hawdi.tech" },
-        { type: "p", text: "Address: Bangkok, Thailand" },
+        { type: "p", text: "Email: support@findmyturn.com" },
+        { type: "p", text: "Address: Bangkok, Thailand (Head Office)" },
       ],
     },
   ],

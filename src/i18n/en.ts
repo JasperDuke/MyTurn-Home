@@ -123,13 +123,22 @@ export const en = {
   globalSupport: {
     sectionLabel: "Global Support",
     title1: "Designed for",
-    titleHighlight: "diverse guests",
-    subtitle: "Multilingual queue screens and QR check-in for tourist-heavy neighborhoods.",
+    titleHighlight: "diverse venues",
+    subtitle: "Built to support multicultural operators while keeping guest check-ins friction-free.",
     features: [
-      { title: "Multilingual Queue Screens", description: "English, Thai, 简体中文, and 繁體中文 out of the box." },
-      { title: "Auto-translated Menus", description: "Digital menus guests can read while they wait." },
-      { title: "Zero-Friction Interface", description: "QR check-in on the web—no app download." }
-    ]
+      {
+        title: "Multilingual Operator Panel",
+        description: "Staff can manage queues, table layouts, and settings in English, Thai, Simplified Chinese, or Traditional Chinese.",
+      },
+      {
+        title: "Web & LINE QR Check-In",
+        description: "Guests scan a QR code to check in instantly via any mobile browser or inside LINE. Zero friction, no app download.",
+      },
+      {
+        title: "Universal Queue Numbers",
+        description: "Guest-facing screens and notifications display numbers in English, ensuring clear communication with international tourists.",
+      },
+    ],
   },
   lineIntegration: {
     sectionLabel: "Customer Communication",
@@ -184,6 +193,8 @@ export const en = {
     title1: "Simple Pricing.",
     titleHighlight: "Built to Scale with You.",
     subtitle: "One branch or many—same queue discipline, shared analytics.",
+    comingSoonLabel: "Coming Soon",
+    startHereLabel: "Start Here",
     plans: [
       {
         name: "Operational Core",
@@ -194,31 +205,36 @@ export const en = {
         setupFee: {
           prefix: "+",
           amount: "$199",
-          badge: "One-time",
-          label: "Implementation & Remote Setup",
+          badge: "Lifetime",
+          label: "Implementation & Training Fee — pay once, pause & resume anytime",
         },
         description:
           "The foundation for eliminating chaos and perfectly matching queues to tables.",
         features: [
           {
-            text: "Complete Remote Onboarding: Custom floor mapping, queue logic setup, and 1-on-1 staff training included.",
+            text: "Queue & Flow: Unlimited queues, Deterministic Table Matching, and BYOD hardware support.",
           },
-          { text: "Unlimited Queues & Customers" },
-          { text: "Deterministic Table Matching Engine" },
-          { text: "Customer LINE & SMS Notifications" },
-          { text: "Basic Analytics & Wait Time Tracking" },
-          { text: "Staff & Manager Accounts" },
-          { text: "BYOD (Bring Your Own Device): Works on any existing iPad, Tablet, or Smart TV." },
+          {
+            text: "Customer Comms: LINE & Telegram notifications, plus automated feedback tracking.",
+          },
+          {
+            text: "Advanced Analytics: Nightly breakdown of peak-hour performance and idle gaps.",
+          },
+          {
+            text: "Complete Setup: Custom floor mapping, staff accounts, and 1-on-1 remote training included.",
+          },
           {
             isExpansion: true,
             label: "Branch Expansion Key",
             price: "+$29 / month",
-            detail: "per additional branch · billed monthly · one master dashboard for all locations",
+            detail: "per additional branch",
           },
         ],
         featured: false,
         ctaLabel: "Start 2-Month Free Trial",
+        trialSubtext: "Onboarding & software are 100% free for 60 days. Pay setup & monthly fees only if you decide to continue.",
         ctaVariant: "secondary" as const,
+        comingSoon: false,
       },
       {
         name: "AI Copilot (Pro Tier)",
@@ -230,20 +246,28 @@ export const en = {
           "For high-traffic venues that want to actively predict demand and recover lost revenue.",
         features: [
           { text: "Everything in Core, plus:" },
-          { text: "Daily AI Insights: Nightly breakdown of peak-hour performance, idle gaps, and bottleneck alerts." },
-          { text: "Predictive Staffing: AI-driven traffic spike alerts for kitchen prep." },
-          { text: "Dynamic Off-Peak Triggers: Auto-send targeted LINE promotions when tables are empty." },
+          {
+            text: "Consultant AI & Predictive Forecasting: Smart peak-hour predictions, bottleneck prevention alerts, and data-driven operational suggestions.",
+          },
+          {
+            text: "Predictive Staffing: AI-driven traffic spike alerts for kitchen prep.",
+          },
+          {
+            text: "Dynamic Off-Peak Triggers: Auto-send targeted LINE promotions when tables are empty.",
+          },
           { text: "Priority 24/7 Support" },
           {
             isExpansion: true,
             label: "Branch Expansion Key",
-            price: "+$49 / month",
+            price: "+$69 / month",
             detail: "per additional branch · billed monthly · one master dashboard for all locations",
           },
         ],
         featured: true,
-        ctaLabel: "Upgrade to AI Copilot",
+        ctaLabel: "Coming Soon",
+        trialSubtext: "",
         ctaVariant: "primary" as const,
+        comingSoon: true,
       },
     ],
   },
@@ -267,6 +291,11 @@ export const en = {
         question: "What is the pricing structure?",
         answer:
           "We charge a one-time onboarding fee of $199. This covers your complete account setup, custom table layout mapping, and staff training. After that, it is a flat $49/month per branch for the Core system, with no hidden fees or contracts.",
+      },
+      {
+        question: "Is the 2-month trial completely free, or do I have to pay the $199 setup fee upfront?",
+        answer:
+          "It is 100% free for 2 months. You do not pay anything upfront. The one-time $199 implementation and training fee is only billed if you choose to continue using MyTurn after your 60-day trial. If you cancel during the trial, you pay absolutely nothing.",
       },
       {
         question: "Do I need to buy expensive kiosks or hardware?",
