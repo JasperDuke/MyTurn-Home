@@ -73,39 +73,39 @@ export const en = {
     cards: [
       {
         title: "Deterministic Queue Logic",
-        description: "WAITING → CALLED → SEATED → FINISHED with auto no-show handling.",
+        description: "Enforce a structured customer journey (Waiting → Called → Seated → Finished) with automated no-show detection and status syncing.",
         footerLabel: "No-Show Rate",
         footerValue: "-45%",
       },
       {
         title: "Smart Recommendations",
-        description: "Seat the best-matched party the moment a table clears.",
+        description: "Instantly suggest the ideal party size the moment a table clears to maximize seat utilization and occupancy.",
         footerLabel: "Utilization",
         footerValue: "98%",
       },
       {
         title: "Idle Gap Analytics",
-        description: "Track ready-to-seated time and prove throughput gains.",
+        description: "Monitor the critical minutes between a table clearing and the next seating to reclaim lost capacity and increase daily turns.",
         footerLabel: "Throughput",
         footerValue: "+18%",
       },
       {
-        title: "Adaptive Seating Engine (AES)",
-        description: "Auto-shifts Free, Normal, and Peak modes as traffic changes.",
-        footerLabel: "Modes",
-        footerValue: "3",
+        title: "AI Owner Copilot",
+        description: "Unlock predictive staffing alerts, bottleneck forecasting, and automated off-peak LINE promotions.",
+        footerLabel: "AI Copilot",
+        footerValue: "Pro Tier",
       },
       {
         title: "Queue Autopilot",
-        description: "System proposes the next call; staff confirm in one tap.",
+        description: "Automate table assignments by letting the system suggest the next optimal party for staff to confirm with a single tap.",
         footerLabel: "Staff taps",
         footerValue: "-80%",
       },
       {
-        title: "Mobile App Booking",
-        description: "Guests join the queue before they arrive.",
-        footerLabel: "Reach",
-        footerValue: "+35%",
+        title: "Get Queue from Home",
+        description: "Allow guests to secure a spot in line remotely via mobile web, reducing physical host stand congestion and walkaways.",
+        footerLabel: "Status",
+        footerValue: "Coming Soon",
       }
     ]
   },

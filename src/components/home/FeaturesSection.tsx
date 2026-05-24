@@ -3,7 +3,7 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InstallMobileOutlinedIcon from "@mui/icons-material/InstallMobileOutlined";
-import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
 import { SectionHeading } from "@/components/home/SectionHeading";
 import { SECTION_HEADER_MB, SECTION_PX, SECTION_PY } from "@/components/home/styles";
@@ -27,9 +27,102 @@ const featureIcons = [
   AccessTimeOutlinedIcon, 
   LightbulbOutlinedIcon, 
   BarChartOutlinedIcon, 
-  SettingsSuggestOutlinedIcon,
+  AutoAwesomeOutlinedIcon,
   RocketLaunchOutlinedIcon,
   InstallMobileOutlinedIcon
+];
+
+const cardThemes = [
+  {
+    // index 0: Rose (Deterministic Queue Logic)
+    bgLight: "rgba(225, 29, 72, 0.03)",
+    bgDark: "rgba(244, 114, 182, 0.05)",
+    borderLight: "rgba(225, 29, 72, 0.08)",
+    borderDark: "rgba(244, 114, 182, 0.12)",
+    labelLight: "#be123c",
+    labelDark: "#f472b6",
+    valueLight: "#e11d48",
+    valueDark: "#f472b6",
+    iconBgLight: "rgba(225, 29, 72, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(225,29,72,0.25), rgba(225,29,72,0.05))",
+    iconColorLight: "#e11d48",
+    iconColorDark: "#f472b6",
+  },
+  {
+    // index 1: Rose Pink (Smart Recommendations)
+    bgLight: "rgba(225, 29, 72, 0.03)",
+    bgDark: "rgba(244, 114, 182, 0.05)",
+    borderLight: "rgba(225, 29, 72, 0.08)",
+    borderDark: "rgba(244, 114, 182, 0.12)",
+    labelLight: "#be123c",
+    labelDark: "#f472b6",
+    valueLight: "#e11d48",
+    valueDark: "#f472b6",
+    iconBgLight: "rgba(251, 113, 133, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(251,113,133,0.25), rgba(251,113,133,0.05))",
+    iconColorLight: "#e11d48",
+    iconColorDark: "#f472b6",
+  },
+  {
+    // index 2: Purple (Idle Gap Analytics)
+    bgLight: "rgba(168, 85, 247, 0.03)",
+    bgDark: "rgba(192, 132, 252, 0.05)",
+    borderLight: "rgba(168, 85, 247, 0.08)",
+    borderDark: "rgba(192, 132, 252, 0.12)",
+    labelLight: "#6b21a8",
+    labelDark: "#c084fc",
+    valueLight: "#8b5cf6",
+    valueDark: "#c084fc",
+    iconBgLight: "rgba(168, 85, 247, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(168,85,247,0.25), rgba(168,85,247,0.05))",
+    iconColorLight: "#a855f7",
+    iconColorDark: "#c084fc",
+  },
+  {
+    // index 3: Blue / AI (AI Owner Copilot)
+    bgLight: "rgba(59, 130, 246, 0.03)",
+    bgDark: "rgba(96, 165, 250, 0.05)",
+    borderLight: "rgba(59, 130, 246, 0.08)",
+    borderDark: "rgba(96, 165, 250, 0.12)",
+    labelLight: "#1d4ed8",
+    labelDark: "#60a5fa",
+    valueLight: "#3b82f6",
+    valueDark: "#60a5fa",
+    iconBgLight: "rgba(59, 130, 246, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(59,130,246,0.25), rgba(59,130,246,0.05))",
+    iconColorLight: "#3b82f6",
+    iconColorDark: "#60a5fa",
+  },
+  {
+    // index 4: Amber (Queue Autopilot)
+    bgLight: "rgba(245, 158, 11, 0.03)",
+    bgDark: "rgba(251, 191, 36, 0.05)",
+    borderLight: "rgba(245, 158, 11, 0.08)",
+    borderDark: "rgba(251, 191, 36, 0.12)",
+    labelLight: "#b45309",
+    labelDark: "#fbbf24",
+    valueLight: "#f59e0b",
+    valueDark: "#fbbf24",
+    iconBgLight: "rgba(245, 158, 11, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(245,158,11,0.25), rgba(245,158,11,0.05))",
+    iconColorLight: "#f59e0b",
+    iconColorDark: "#fbbf24",
+  },
+  {
+    // index 5: Emerald Green (Get Queue from Home)
+    bgLight: "rgba(16, 185, 129, 0.03)",
+    bgDark: "rgba(52, 211, 153, 0.05)",
+    borderLight: "rgba(16, 185, 129, 0.08)",
+    borderDark: "rgba(52, 211, 153, 0.12)",
+    labelLight: "#047857",
+    labelDark: "#34d399",
+    valueLight: "#10b981",
+    valueDark: "#34d399",
+    iconBgLight: "rgba(16, 185, 129, 0.08)",
+    iconBgDark: "linear-gradient(135deg, rgba(16,185,129,0.25), rgba(16,185,129,0.05))",
+    iconColorLight: "#10b981",
+    iconColorDark: "#34d399",
+  }
 ];
 
 export function FeaturesSection() {
@@ -75,6 +168,7 @@ export function FeaturesSection() {
         >
           {t.features.cards.map((card, index) => {
             const Icon = featureIcons[index];
+            const currentTheme = cardThemes[index] || cardThemes[0];
             return (
               <Box
                 component={motion.div}
@@ -90,96 +184,89 @@ export function FeaturesSection() {
                   boxShadow: isDark ? "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)" : "0 8px 32px rgba(0,0,0,0.04)",
                   "&:hover": { 
                     boxShadow: isDark ? "0 12px 40px rgba(0,0,0,0.4)" : "0 12px 40px rgba(37,99,235,0.1)",
-                    border: isDark ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(37,99,235,0.2)",
+                    border: isDark ? "1px solid rgba(255, 255, 255, 0.15)" : `1px solid ${currentTheme.iconColorLight}40`,
                   },
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "100%",
                 }}
               >
+                <Box>
+                  <Box
+                    sx={{
+                      width: 52,
+                      height: 52,
+                      borderRadius: "16px",
+                      background: isDark ? currentTheme.iconBgDark : currentTheme.iconBgLight,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: isDark ? currentTheme.iconColorDark : currentTheme.iconColorLight,
+                    }}
+                  >
+                    {Icon ? <Icon sx={{ fontSize: 26 }} /> : null}
+                  </Box>
+                  <Typography sx={{ mt: 2.5, fontWeight: 600, fontSize: 18, color: "text.primary" }}>{card.title}</Typography>
+                  <Typography sx={{ mt: 1, color: "text.secondary", fontSize: 14, lineHeight: 1.5, fontWeight: 500 }}>
+                    {card.description}
+                  </Typography>
+                </Box>
                 <Box
                   sx={{
-                    width: 52,
-                    height: 52,
-                    borderRadius: "16px",
-                    background:
-                      index === 0 ? (isDark ? "linear-gradient(135deg, rgba(225,29,72,0.3), rgba(225,29,72,0.1))" : "rgba(225, 29, 72, 0.1)")
-                      : index === 1 ? (isDark ? "linear-gradient(135deg, rgba(251,113,133,0.3), rgba(251,113,133,0.1))" : "rgba(251, 113, 133, 0.1)")
-                      : index === 2 ? (isDark ? "linear-gradient(135deg, rgba(159,18,57,0.3), rgba(159,18,57,0.1))" : "rgba(159, 18, 57, 0.1)")
-                      : index === 3 ? (isDark ? "linear-gradient(135deg, rgba(59,130,246,0.3), rgba(59,130,246,0.1))" : "rgba(59, 130, 246, 0.1)") // Blue
-                      : index === 4 ? (isDark ? "linear-gradient(135deg, rgba(245,158,11,0.3), rgba(245,158,11,0.1))" : "rgba(245, 158, 11, 0.1)") // Amber
-                      : (isDark ? "linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.1))" : "rgba(16, 185, 129, 0.1)"), // Emerald green
+                    mt: 3,
+                    borderRadius: "14px",
+                    p: 1.5,
+                    bgcolor: isDark ? currentTheme.bgDark : currentTheme.bgLight,
+                    border: `1px solid ${isDark ? currentTheme.borderDark : currentTheme.borderLight}`,
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: 
-                      index === 0 ? (isDark ? "#F472B6" : "#E11D48")
-                      : index === 1 ? (isDark ? "#F472B6" : "#E11D48")
-                      : index === 2 ? (isDark ? "#c084fc" : "#a855f7")
-                      : index === 3 ? (isDark ? "#60a5fa" : "#3b82f6")
-                      : index === 4 ? (isDark ? "#fbbf24" : "#f59e0b")
-                      : (isDark ? "#34d399" : "#10b981"),
+                    justifyContent: "space-between",
+                    alignItems: "center"
                   }}
                 >
-                  {Icon ? <Icon sx={{ fontSize: 26 }} /> : null}
+                  <Typography
+                    sx={{
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: isDark ? currentTheme.labelDark : currentTheme.labelLight
+                    }}
+                  >
+                    {card.footerLabel}
+                  </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.8 }}>
+                    {index === 5 && (
+                      <Box
+                        sx={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: "50%",
+                          bgcolor: isDark ? "#34d399" : "#10b981",
+                          animation: "pulse 2s infinite",
+                          "@keyframes pulse": {
+                            "0%": {
+                              boxShadow: `0 0 0 0 ${isDark ? "rgba(52, 211, 153, 0.4)" : "rgba(16, 185, 129, 0.4)"}`,
+                            },
+                            "70%": {
+                              boxShadow: `0 0 0 6px ${isDark ? "rgba(52, 211, 153, 0)" : "rgba(16, 185, 129, 0)"}`,
+                            },
+                            "100%": {
+                              boxShadow: `0 0 0 0 ${isDark ? "rgba(52, 211, 153, 0)" : "rgba(16, 185, 129, 0)"}`,
+                            },
+                          },
+                        }}
+                      />
+                    )}
+                    <Typography
+                      sx={{
+                        fontSize: 16,
+                        fontWeight: 700,
+                        color: isDark ? currentTheme.valueDark : currentTheme.valueLight
+                      }}
+                    >
+                      {card.footerValue}
+                    </Typography>
+                  </Box>
                 </Box>
-                <Typography sx={{ mt: 2.5, fontWeight: 600, fontSize: 18, color: "text.primary" }}>{card.title}</Typography>
-                <Typography sx={{ mt: 1, color: "text.secondary", fontSize: 14, lineHeight: 1.5, fontWeight: 500 }}>
-                  {card.description}
-                </Typography>
-                {index === 0 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 1.5 }}>
-                      <Typography sx={{ fontSize: 13, color: "text.secondary", fontWeight: 600 }}>{card.footerLabel}</Typography>
-                      <Typography sx={{ fontSize: 16, fontWeight: 600, color: isDark ? "#F472B6" : "#E11D48" }}>{card.footerValue}</Typography>
-                    </Box>
-                  </Box>
-                )}
-                {index === 1 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", display: "flex", alignItems: "center", gap: 1.2, border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Box sx={{ width: 38, height: 38, borderRadius: "10px", bgcolor: isDark ? "rgba(251,113,133,0.2)" : "rgba(225,29,72,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: isDark ? "#F472B6" : "#E11D48", fontWeight: 600, fontSize: 14 }}>
-                      98%
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontSize: 13, fontWeight: 600, color: "text.primary" }}>Best Match</Typography>
-                      <Typography sx={{ fontSize: 12, color: "text.secondary", fontWeight: 500 }}>Eliminates wasted seats</Typography>
-                    </Box>
-                  </Box>
-                )}
-                {index === 2 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", display: "flex", justifyContent: "space-between", alignItems: "flex-end", border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Box>
-                      <Typography sx={{ fontSize: 12, color: "text.secondary", fontWeight: 600 }}>{card.footerLabel}</Typography>
-                      <Typography sx={{ fontSize: 20, fontWeight: 600, color: isDark ? "#c084fc" : "#a855f7" }}>{card.footerValue}</Typography>
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "flex-end", gap: 0.5, height: 36 }}>
-                      {[40, 60, 80, 100].map((h, i) => (
-                        <Box key={h} sx={{ width: 8, borderRadius: "4px 4px 0 0", height: `${h}%`, bgcolor: i === 3 ? (isDark ? "#c084fc" : "#a855f7") : (isDark ? `rgba(168,85,247,${0.45 + i * 0.12})` : `rgba(168,85,247,${0.2 + i * 0.1})`) }} />
-                      ))}
-                    </Box>
-                  </Box>
-                )}
-                {index === 3 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", display: "flex", justifyContent: "space-between", mb: 1.5, border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Typography sx={{ fontSize: 13, color: "text.secondary", fontWeight: 600 }}>{card.footerLabel}</Typography>
-                    <Typography sx={{ fontSize: 16, fontWeight: 600, color: isDark ? "#60a5fa" : "#3b82f6" }}>{card.footerValue}</Typography>
-                  </Box>
-                )}
-                {index === 4 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", display: "flex", justifyContent: "space-between", mb: 1.5, border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Typography sx={{ fontSize: 13, color: "text.secondary", fontWeight: 600 }}>{card.footerLabel}</Typography>
-                    <Typography sx={{ fontSize: 16, fontWeight: 600, color: isDark ? "#fbbf24" : "#f59e0b" }}>{card.footerValue}</Typography>
-                  </Box>
-                )}
-                {index === 5 && (
-                  <Box sx={{ mt: 3, borderRadius: "14px", p: 1.5, bgcolor: isDark ? "rgba(15,23,42,0.4)" : "#f1f5f9", display: "flex", justifyContent: "space-between", alignItems: "center", border: isDark ? "none" : "1px solid rgba(0,0,0,0.03)" }}>
-                    <Box>
-                      <Typography sx={{ fontSize: 12, color: "text.secondary", fontWeight: 600 }}>{card.footerLabel}</Typography>
-                      <Typography sx={{ fontSize: 16, fontWeight: 600, color: isDark ? "#34d399" : "#10b981" }}>{card.footerValue}</Typography>
-                    </Box>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 0.8 }}>
-                      <Box sx={{ width: 6, height: 6, borderRadius: "50%", bgcolor: isDark ? "#34d399" : "#10b981", animation: "pulse 2s infinite", "@keyframes pulse": { "0%": { boxShadow: "0 0 0 0 rgba(16, 185, 129, 0.4)" }, "70%": { boxShadow: "0 0 0 6px rgba(16, 185, 129, 0)" }, "100%": { boxShadow: "0 0 0 0 rgba(16, 185, 129, 0)" } } }} />
-                      <Typography sx={{ fontSize: 11, fontWeight: 600, color: isDark ? "#34d399" : "#10b981" }}>Live Sync</Typography>
-                    </Box>
-                  </Box>
-                )}
               </Box>
             );
           })}
