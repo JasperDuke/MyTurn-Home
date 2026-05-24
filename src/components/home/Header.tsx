@@ -1,17 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
-import { AppBar, Box, Button, Container, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Container, Toolbar, useTheme } from "@mui/material";
 import { BookDemoModal } from "@/components/home/BookDemoModal";
 import MyTurnLogo from "@/components/MyTurnLogo";
 import { useLanguage } from "@/i18n/LanguageProvider";
-
+import { primaryCtaSx } from "@/components/home/styles";
+import {
+  hashFromHomeLink,
+  isHomeHashLink,
+  scrollToSection,
+} from "@/lib/scroll";
 
 export function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useLanguage();
   const pathname = usePathname();
+  const isDark = useTheme().palette.mode === "dark";
 
   const links = [
     { label: t.footer.links["Features"], href: "/#features" },
@@ -20,6 +26,20 @@ export function Header() {
     { label: t.footer.links["About Us"], href: "/about" },
     { label: t.footer.links["Contact"], href: "/#contact" },
   ];
+
+  const handleNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!isHomeHashLink(href) || pathname !== "/") return;
+
+    const id = hashFromHomeLink(href);
+    if (!document.getElementById(id)) return;
+
+    event.preventDefault();
+    scrollToSection(id);
+    window.history.pushState(null, "", href);
+  };
 
   return (
     <AppBar
@@ -41,10 +61,17 @@ export function Header() {
           >
             {links.map((link) => {
               const isActive = pathname === link.href;
+
               return (
                 <Button
                   key={link.label}
                   href={link.href}
+                  onClick={(e) =>
+                    handleNavClick(
+                      e as unknown as MouseEvent<HTMLAnchorElement>,
+                      link.href,
+                    )
+                  }
                   sx={{
                     color: isActive ? "primary.main" : "text.primary",
                     fontSize: 14,
@@ -68,16 +95,10 @@ export function Header() {
               variant="contained"
               color="primary"
               sx={{
-                textTransform: "none",
-                borderRadius: "8px",
+                ...primaryCtaSx(isDark),
                 px: 2.4,
-                py: 1.15,
-                fontWeight: 500,
-                boxShadow: "none",
-                "&:hover": {
-                  bgcolor: "primary.main",
-                  boxShadow: "none",
-                },
+                py: 1.1,
+                fontSize: 14,
               }}
               onClick={() => setIsModalOpen(true)}
             >

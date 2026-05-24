@@ -2,6 +2,24 @@ import { Box, Container, Link, Typography, useTheme } from "@mui/material";
 import MyTurnLogo from "@/components/MyTurnLogo";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
+const FOOTER_LINK_HREFS: Record<string, string> = {
+  Features: "/#features",
+  "How It Works": "/#how-it-works",
+  Pricing: "/#pricing",
+  "About Us": "/about",
+  Contact: "/#contact",
+  "Privacy Policy": "/privacy",
+  "นโยบายความเป็นส่วนตัว": "/privacy",
+  "เกี่ยวกับเรา": "/about",
+  "ติดต่อเรา": "/#contact",
+};
+
+const FOOTER_LEGAL_HREFS: Record<string, string> = {
+  "Privacy Policy": "/privacy",
+  "Terms of Service": "/terms",
+  "Cookie Settings": "#",
+};
+
 export function Footer() {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -9,7 +27,6 @@ export function Footer() {
 
   return (
     <Box
-      id="contact"
       component="footer"
       sx={{
         py: 8,
@@ -41,6 +58,26 @@ export function Footer() {
               }}
             >
               {t.footer.description}
+            </Typography>
+            <Typography
+              sx={{
+                mt: 2,
+                fontSize: 14,
+                fontWeight: 600,
+                color: "text.primary",
+              }}
+            >
+              {t.footer.companyName}
+            </Typography>
+            <Typography
+              sx={{
+                mt: 0.5,
+                fontSize: 13,
+                fontWeight: 500,
+                color: "text.secondary",
+              }}
+            >
+              {t.footer.address}
             </Typography>
             <Box sx={{ mt: 2.5 }}>
               <Link
@@ -88,7 +125,7 @@ export function Footer() {
               {column.links.map((link) => (
                 <Link
                   key={link}
-                  href={link === "About Us" ? "/about" : "#"}
+                  href={FOOTER_LINK_HREFS[link] ?? "#"}
                   underline="none"
                   sx={{
                     display: "block",
@@ -134,7 +171,7 @@ export function Footer() {
               (item) => (
                 <Link
                   key={item}
-                  href="#"
+                  href={FOOTER_LEGAL_HREFS[item] ?? "#"}
                   underline="none"
                   sx={{
                     color: isDark ? "#6b7280" : "text.secondary",

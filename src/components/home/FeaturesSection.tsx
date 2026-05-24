@@ -5,6 +5,8 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import InstallMobileOutlinedIcon from "@mui/icons-material/InstallMobileOutlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
+import { SectionHeading } from "@/components/home/SectionHeading";
+import { SECTION_HEADER_MB, SECTION_PX, SECTION_PY } from "@/components/home/styles";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { motion, Variants } from "framer-motion";
 
@@ -36,7 +38,7 @@ export function FeaturesSection() {
   const { t } = useLanguage();
 
   return (
-    <Box id="features" component="section" sx={{ py: { xs: 8, md: 14 }, px: { xs: 2, sm: 3 }, position: "relative", bgcolor: isDark ? "transparent" : "#ffffff" }}>
+    <Box sx={{ py: SECTION_PY, px: SECTION_PX, position: "relative", bgcolor: isDark ? "transparent" : "#ffffff" }}>
       <Box
         sx={{
           position: "absolute",
@@ -52,28 +54,15 @@ export function FeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          sx={{ textAlign: "center", maxWidth: 860, mx: "auto", mb: { xs: 5, md: 8 }, position: "relative" }}
+          sx={{ mb: SECTION_HEADER_MB, position: "relative" }}
         >
-          <Typography sx={{ color: isDark ? "#F472B6" : "#E11D48", textTransform: "uppercase", letterSpacing: "0.08em", fontSize: 13, fontWeight: 800 }}>
-            {t.features.sectionLabel}
-          </Typography>
-          <Typography sx={{ mt: 1.5, fontSize: { xs: "2rem", sm: "2.5rem", md: "3.2rem" }, fontWeight: 400, lineHeight: 1.15, color: "text.primary" }}>
-            {t.features.title1}{" "}
-            <Box
-              component="span"
-              sx={{
-                background: isDark ? "linear-gradient(135deg, #F472B6 0%, #FB7185 50%, #FB923C 100%)" : "linear-gradient(135deg, #EC4899 0%, #E11D48 50%, #F97316 100%)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              {t.features.titleHighlight}
-            </Box>
-          </Typography>
-          <Typography sx={{ mt: 2, color: "text.secondary", fontSize: { xs: 16, md: 20 }, lineHeight: 1.55 }}>
-            {t.features.subtitle}
-          </Typography>
+          <SectionHeading
+            label={t.features.sectionLabel}
+            title={t.features.title1}
+            titleHighlight={t.features.titleHighlight}
+            subtitle={t.features.subtitle}
+            maxWidth={860}
+          />
         </Box>
 
         <Box

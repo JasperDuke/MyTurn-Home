@@ -25,10 +25,9 @@ export function GlobalSupportSection() {
 
   return (
     <Box
-      component="section"
       sx={{
-        py: { xs: 10, md: 14 },
-        px: 2,
+        py: { xs: 10, md: 12 },
+        px: { xs: 2, sm: 3 },
         position: "relative",
         bgcolor: sectionBg,
         borderTop: isDark ? `1px solid ${borderSubtle}` : "none",

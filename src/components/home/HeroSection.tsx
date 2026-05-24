@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import { BookDemoModal } from "@/components/home/BookDemoModal";
 import { ProductShot } from "@/components/home/ProductShot";
+import { primaryCtaSx, secondaryCtaSx, SECTION_PX } from "@/components/home/styles";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { scrollToSection } from "@/lib/scroll";
 import { motion, Variants } from "framer-motion";
 
 const containerVariants: Variants = {
@@ -32,16 +34,15 @@ export function HeroSection() {
   const isDark = theme.palette.mode === "dark";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useLanguage();
-  const cockpitSrc = "/cockpit.png";
+  const cockpitSrc = "/assets/cockpit.png";
 
   return (
     <Box
-      component="section"
       sx={{
         minHeight: { xs: "auto", lg: "92vh" },
         pt: { xs: 12, md: 13 },
         pb: { xs: 8, md: 9 },
-        px: 2,
+        px: SECTION_PX,
         position: "relative",
         overflow: "hidden",
         "@keyframes heroMobileFloat": {
@@ -137,6 +138,7 @@ export function HeroSection() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
+            sx={{ minWidth: 0, position: "relative", zIndex: 1 }}
           >
             <Box
               component={motion.div}
@@ -178,23 +180,37 @@ export function HeroSection() {
             >
               {t.hero.tagline}
             </Typography>
-            <Typography
+            <Box
               component={motion.h1}
               variants={itemVariants}
-              variant="h2"
               sx={{
                 mt: 1.5,
+                display: "flex",
+                flexDirection: { xs: "column", lg: "row" },
+                flexWrap: "wrap",
+                alignItems: { xs: "flex-start", lg: "baseline" },
+                columnGap: { lg: 0.6 },
+                rowGap: { xs: 0.15, lg: 0 },
                 fontSize: { xs: "2rem", sm: "2.7rem", lg: "3.6rem" },
-                lineHeight: 1.1,
+                lineHeight: 1.08,
                 letterSpacing: "-0.03em",
-                fontWeight: 400,
                 color: "text.primary",
               }}
             >
-              {t.hero.title1}{" "}
               <Box
                 component="span"
                 sx={{
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {t.hero.title1}
+              </Box>
+              <Box
+                component="span"
+                sx={{
+                  fontWeight: 700,
+                  whiteSpace: "nowrap",
                   background: isDark
                     ? "linear-gradient(135deg, #F472B6 0%, #FB7185 50%, #FB923C 100%)"
                     : "linear-gradient(135deg, #EC4899 0%, #E11D48 50%, #F97316 100%)",
@@ -204,9 +220,13 @@ export function HeroSection() {
                 }}
               >
                 {t.hero.titleHighlight}
-              </Box>{" "}
-              {t.hero.title2}
-            </Typography>
+              </Box>
+              {t.hero.title2 ? (
+                <Box component="span" sx={{ fontWeight: 500 }}>
+                  {t.hero.title2}
+                </Box>
+              ) : null}
+            </Box>
 
             <Typography
               component={motion.p}
@@ -214,82 +234,48 @@ export function HeroSection() {
               sx={{
                 mt: 3,
                 color: "text.secondary",
-                fontSize: { xs: 16, md: 19 },
-                lineHeight: 1.6,
-                maxWidth: 650,
+                fontSize: { xs: 15, sm: 16, md: 18 },
+                lineHeight: 1.65,
+                maxWidth: 640,
               }}
             >
               {t.hero.subtitle}
             </Typography>
 
-            <Stack
-              component={motion.div}
-              variants={itemVariants}
-              direction={{ xs: "column", sm: "row" }}
-              spacing={1.75}
-              sx={{ mt: 4 }}
-            >
-              <Button
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  borderRadius: "12px",
-                  px: 4,
-                  py: 1.6,
-                  fontWeight: 500,
-                  fontSize: 16,
-                  boxShadow: isDark
-                    ? "0 8px 24px rgba(59,130,246,0.3)"
-                    : "0 8px 24px rgba(37,99,235,0.25)",
-                  background: isDark
-                    ? "linear-gradient(90deg, #F472B6 0%, #FB923C 100%)"
-                    : "linear-gradient(90deg, #EC4899 0%, #F97316 100%)",
-                  "&:hover": {
-                    boxShadow: isDark
-                      ? "0 12px 32px rgba(59,130,246,0.4)"
-                      : "0 12px 32px rgba(37,99,235,0.35)",
-                    transform: "translateY(-2px)",
-                    background: isDark
-                      ? "linear-gradient(90deg, #E11D48 0%, #9F1239 100%)"
-                      : "linear-gradient(90deg, #BE123C 0%, #881337 100%)",
-                  },
-                }}
-                onClick={() => setIsModalOpen(true)}
+            <Box component={motion.div} variants={itemVariants} sx={{ mt: 4 }}>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={1.75}
+                sx={{ alignItems: { xs: "stretch", sm: "center" } }}
               >
-                {t.hero.bookDemo}
-              </Button>
-              <Button
-                variant="outlined"
+                <Button
+                  variant="contained"
+                  sx={primaryCtaSx(isDark)}
+                  onClick={() => scrollToSection("pricing")}
+                >
+                  {t.hero.startTrial}
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={secondaryCtaSx(isDark)}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  {t.hero.bookDemo}
+                </Button>
+              </Stack>
+              <Typography
+                component="p"
                 sx={{
-                  borderColor: isDark
-                    ? "rgba(255, 255, 255, 0.1)"
-                    : "rgba(0, 0, 0, 0.1)",
-                  color: "text.primary",
-                  textTransform: "none",
-                  borderRadius: "12px",
-                  px: 4,
-                  py: 1.6,
-                  fontWeight: 500,
-                  fontSize: 16,
-                  background: isDark
-                    ? "rgba(30, 32, 44, 0.7)"
-                    : "rgba(255, 255, 255, 0.8)",
-                  backdropFilter: "blur(20px)",
-                  boxShadow: isDark ? "none" : "0 4px 12px rgba(0,0,0,0.03)",
-                  "&:hover": {
-                    background: isDark
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(255,255,255,1)",
-                    borderColor: isDark
-                      ? "rgba(255, 255, 255, 0.2)"
-                      : "rgba(0, 0, 0, 0.2)",
-                  },
+                  mt: 1.75,
+                  fontSize: { xs: 13, sm: 14 },
+                  lineHeight: 1.5,
+                  color: "text.secondary",
+                  textAlign: { xs: "center", sm: "left" },
                 }}
-                onClick={() => setIsModalOpen(true)}
               >
-                {t.hero.learnMore}
-              </Button>
-            </Stack>
+                {t.hero.ctaNote}
+              </Typography>
+            </Box>
           </Box>
 
           <Box
@@ -299,6 +285,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 200, damping: 25 }}
             sx={{
               position: "relative",
+              minWidth: 0,
               minHeight: { xs: 380, sm: 490, lg: 580 },
               display: "flex",
               justifyContent: "center",
@@ -310,51 +297,37 @@ export function HeroSection() {
             <Box
               sx={{
                 width: "100%",
-                maxWidth: {
-                  xs: "min(100%, 580px)",
-                  sm: "min(100%, 640px)",
-                  md: "min(100%, 680px)",
-                  lg: "min(100%, 720px)",
-                },
+                maxWidth: "100%",
                 mx: "auto",
                 transform: {
-                  xs: "translate(-3%, -4%)",
-                  md: "translate(-11%, -12%)",
+                  xs: "translateY(-2%)",
+                  lg: "translateY(-4%)",
                 },
-                transformOrigin: "center center",
               }}
             >
-              <Box
+              <ProductShot
+                src={cockpitSrc}
+                alt="MyTurn live cockpit showing queue, table status, and seat recommendation"
+                naturalSize
+                objectFit="contain"
+                priority
                 sx={{
-                  p: "2px",
-                  borderRadius: "4px",
-                  backgroundColor: "rgba(54, 61, 64, 0.7)",
+                  width: "100%",
+                  border: "none",
+                  bgcolor: "transparent",
+                  boxShadow: "none",
+                  borderRadius: 0,
+                  overflow: "visible",
                 }}
-              >
-                <ProductShot
-                  src={cockpitSrc}
-                  alt="MyTurn live cockpit showing queue, table status, and seat recommendation"
-                  aspectRatio="16 / 9"
-                  objectFit="cover"
-                  priority
-                  sx={{
-                    width: "100%",
-                    border: "none",
-                    borderRadius: "4px",
-                    boxShadow: isDark
-                      ? "0 14px 34px rgba(0,0,0,0.35)"
-                      : "0 14px 34px rgba(15,23,42,0.12)",
-                  }}
-                />
-              </Box>
+              />
             </Box>
 
             <Box
               sx={{
                 position: "absolute",
-                right: { xs: 0, md: 12 },
+                right: { xs: 0, md: 8, lg: 12 },
                 bottom: { xs: -12, md: 56 },
-                width: { xs: 118, sm: 144 },
+                width: { xs: 118, sm: 144, md: 160 },
                 display: { xs: "none", sm: "block" },
               }}
             >
@@ -367,19 +340,16 @@ export function HeroSection() {
                 }}
               >
                 <ProductShot
-                  src="/scanned-mobile-2.png"
+                  src="/assets/mobile-2.png"
                   alt="Customer mobile screen showing it is their turn"
-                  aspectRatio="9 / 19"
-                  objectFit="cover"
+                  naturalSize
+                  objectFit="contain"
                   sx={{
-                    borderRadius: "28px",
-                    border: isDark
-                      ? "1px solid rgba(255, 255, 255, 0.88)"
-                      : "1px solid rgba(255, 255, 255, 0.98)",
-                    boxShadow: isDark
-                      ? "0 18px 38px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06)"
-                      : "0 18px 38px rgba(15,23,42,0.14), inset 0 0 0 1px rgba(255,255,255,0.75)",
-                    transform: "translateX(-8%)",
+                    border: "none",
+                    bgcolor: "transparent",
+                    boxShadow: "none",
+                    borderRadius: 0,
+                    overflow: "visible",
                   }}
                 />
               </Box>

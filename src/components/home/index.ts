@@ -1,11 +1,17 @@
 export { Header } from "./Header";
+export { HomeSection } from "./HomeSection";
+export { SectionHeading } from "./SectionHeading";
 export { HeroSection } from "./HeroSection";
 export { ProblemSolutionSection } from "./ProblemSolutionSection";
 export { FeaturesSection } from "./FeaturesSection";
 export { GlobalSupportSection } from "./GlobalSupportSection";
 export { LineNotificationsSection } from "./LineNotificationsSection";
 export { HowItWorksSection } from "./HowItWorksSection";
+export { VisionSection } from "./VisionSection";
+export { OnboardingSection } from "./OnboardingSection";
 export { CtaSection } from "./CtaSection";
+export { FaqSection } from "./FaqSection";
+export { PreFooterCtaSection } from "./PreFooterCtaSection";
 export { Footer } from "./Footer";
 export { BookDemoModal } from "./BookDemoModal";
 

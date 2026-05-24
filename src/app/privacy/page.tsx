@@ -1,10 +1,10 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { TeamSection } from "@/components/about/TeamSection";
 import { Header, Footer } from "@/components/home";
+import { PrivacyPolicyContent } from "@/components/legal/PrivacyPolicyContent";
 
-export default function AboutPage() {
+export default function PrivacyPage() {
   return (
     <Box
       sx={{
@@ -14,8 +14,8 @@ export default function AboutPage() {
       }}
     >
       <Header />
-      <Box component="main" sx={{ pt: { xs: 12, md: 13 }, pb: { xs: 4, md: 6 } }}>
-        <TeamSection />
+      <Box component="main" sx={{ pt: { xs: 12, md: 13 } }}>
+        <PrivacyPolicyContent />
       </Box>
       <Footer />
     </Box>
