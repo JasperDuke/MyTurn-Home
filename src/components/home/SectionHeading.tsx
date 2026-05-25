@@ -43,11 +43,11 @@ export function SectionHeading({
         sx={{
           ...sectionTitleSx,
           ...(singleLineTitle && {
-            whiteSpace: "nowrap",
+            whiteSpace: { xs: "normal", md: "nowrap" },
             fontSize: {
-              xs: "clamp(0.8rem, 2.85vw + 0.52rem, 2.75rem)",
-              sm: "clamp(1.125rem, 2.1vw + 0.75rem, 2.75rem)",
-              md: "2.75rem",
+              xs: "clamp(1.5rem, 4vw + 0.5rem, 1.8rem)",
+              sm: "clamp(1.8rem, 3vw + 0.6rem, 2.25rem)",
+              md: "clamp(2rem, 2.5vw + 0.5rem, 2.75rem)",
             },
           }),
         }}

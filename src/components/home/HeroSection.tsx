@@ -306,12 +306,14 @@ export function HeroSection() {
             sx={{
               position: "relative",
               minWidth: 0,
-              minHeight: { xs: 380, sm: 490, lg: 580 },
+              minHeight: { xs: "auto", sm: 490, lg: 580 },
               display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
               justifyContent: "center",
               alignItems: "center",
               pt: 0,
               overflow: "visible",
+              gap: { xs: 4, sm: 0 },
             }}
           >
             <Box
@@ -320,7 +322,7 @@ export function HeroSection() {
                 maxWidth: "100%",
                 mx: "auto",
                 transform: {
-                  xs: "translateY(-8%)",
+                  xs: "none",
                   lg: "translateY(-22%)",
                 },
               }}
@@ -344,11 +346,12 @@ export function HeroSection() {
 
             <Box
               sx={{
-                position: "absolute",
-                right: { xs: 0, sm: -16, md: -24, lg: -36 },
-                bottom: { xs: -12, sm: 24, md: 40, lg: 44 },
-                width: { xs: 118, sm: 126, md: 140 },
-                display: { xs: "none", sm: "block" },
+                position: { xs: "relative", sm: "absolute" },
+                right: { xs: "auto", sm: -16, md: -24, lg: -36 },
+                bottom: { xs: "auto", sm: 24, md: 40, lg: 44 },
+                width: { xs: 100, sm: 126, md: 140 },
+                display: "block",
+                mx: { xs: "auto", sm: 0 },
               }}
             >
               <Box
@@ -358,8 +361,8 @@ export function HeroSection() {
                     animation: "none",
                   },
                   position: "relative",
-                  borderRadius: "28px",
-                  py: 2,
+                  borderRadius: { xs: "20px", sm: "28px" },
+                  py: { xs: 1.5, sm: 2 },
                   border: "1px solid #09090b",
                   outline: "1px solid #27272a",
                   bgcolor: "#F4F9F9",
@@ -372,12 +375,12 @@ export function HeroSection() {
                   "&::before": {
                     content: '""',
                     position: "absolute",
-                    top: "6px",
+                    top: { xs: "4px", sm: "6px" },
                     left: "50%",
                     transform: "translateX(-50%)",
-                    width: "36px",
-                    height: "11px",
-                    borderRadius: "6px",
+                    width: { xs: "28px", sm: "36px" },
+                    height: { xs: "8px", sm: "11px" },
+                    borderRadius: { xs: "4px", sm: "6px" },
                     backgroundColor: "#09090b",
                     zIndex: 10,
                   },

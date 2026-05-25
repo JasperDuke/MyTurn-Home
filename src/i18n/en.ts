@@ -315,7 +315,7 @@ export const en = {
       {
         question: "Can I manage multiple branches?",
         answer:
-          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. We offer discounted Branch Expansion Keys ($49/month for Core, $69/month for AI Copilot) as you grow.",
+          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. We offer discounted Branch Expansion Keys ($29/month for Core, $69/month for AI Copilot) as you grow.",
       },
       {
         question: "Am I locked into a long-term contract?",
