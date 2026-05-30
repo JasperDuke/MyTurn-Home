@@ -109,6 +109,43 @@ export const en = {
       }
     ]
   },
+  branchModes: {
+    sectionLabel: "Branch floor modes",
+    title1: "Fixed tables or",
+    titleHighlight: "flexible seating",
+    subtitle:
+      "Every branch picks one mode at setup—table-mapped discipline or party-first flow for dynamic floors.",
+    imageAlt: "MyTurn create-branch screen to choose Fixed mode or Flex mode",
+    supportLine:
+      "Dynamic seating with no table map? Flex mode keeps your queue structured and efficient—without Autopilot.",
+    fixed: {
+      badge: "Fixed mode",
+      title: "Table map & pax-driven flow",
+      description:
+        "Table map, split seating, and Autopilot driven by each table's stock and capacity.",
+      recommendedLabel: "Recommended for",
+      tags: ["Hotpot", "BBQ", "Café"],
+      bullets: [
+        "Full table mapping tied to party size (pax)",
+        "Smart seat matching when tables turn",
+        "Queue Autopilot and table-level insights",
+      ],
+    },
+    flex: {
+      badge: "Flex mode",
+      title: "Party-size queue, dynamic seating",
+      description:
+        "Party-size queue only—when a table frees, staff seat the next group by headcount (4, 5, 6…) with quick-spot actions.",
+      recommendedLabel: "Recommended for",
+      tags: ["Hawker", "Stall", "Quick service"],
+      bullets: [
+        "Queue by party size—no fixed table assignment",
+        "Fast call-and-seat workflow for compact floors",
+        "Deterministic queue rules without a floor map",
+      ],
+      note: "Autopilot is not available in Flex mode; you still get an efficient, structured queue system.",
+    },
+  },
   howItWorks: {
     sectionLabel: "How It Works",
     title1: "4 Steps to",
@@ -270,6 +307,22 @@ export const en = {
         comingSoon: true,
       },
     ],
+  },
+  surveyUrgency: {
+    ariaLabel: "Restaurant floor survey",
+    sectionLabel: "Before you leave",
+    titleLine1: "Every rush you run blind",
+    titleLine2: "bleeds revenue",
+    subtitle:
+      "If you won't tell us what breaks at your door, you're choosing to keep losing covers. Two minutes—one honest snapshot of your floor—or keep paying for chaos you never measured.",
+    stakes: [
+      "Idle gaps you don't track compound into lost covers every peak service",
+      "No survey means no tailored fix—we can't show you what you're leaving on the table",
+      "Walk away now and competitors tighten flow while you keep guessing",
+    ],
+    cta: "Take the 2-minute survey now",
+    urgencyNote: "Do it now. Waiting is choosing to lose money you can't see yet.",
+    contactHint: "Rather talk first? Book a demo below—we'll still ask what's breaking your floor.",
   },
   closingCta: {
     sectionLabel: "Simple, per-branch monthly fee • Unlimited Seats",

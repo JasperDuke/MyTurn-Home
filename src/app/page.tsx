@@ -6,8 +6,10 @@ import {
   CtaSection,
   FaqSection,
   FeaturesSection,
+  BranchModesSection,
   Footer,
   PreFooterCtaSection,
+  SurveyUrgencySection,
   GlobalSupportSection,
   Header,
   HeroSection,
@@ -63,6 +65,8 @@ export default function Home() {
           <FeaturesSection />
         </HomeSection>
 
+        <BranchModesSection />
+
         <GlobalSupportSection />
         <LineNotificationsSection />
         <OnboardingSection />
@@ -84,6 +88,7 @@ export default function Home() {
         </HomeSection>
       </main>
 
+      <SurveyUrgencySection />
       <PreFooterCtaSection />
 
       <HomeSection id="contact" aria-label="Contact">

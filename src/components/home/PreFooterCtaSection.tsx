@@ -38,7 +38,8 @@ export function PreFooterCtaSection() {
         px: SECTION_PX,
         position: "relative",
         overflow: "hidden",
-        bgcolor: isDark ? "transparent" : "#fdf2f8",
+        bgcolor: isDark ? "transparent" : "#ffffff",
+        borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(15,23,42,0.06)",
       }}
     >
       <Box
@@ -46,13 +47,15 @@ export function PreFooterCtaSection() {
           position: "absolute",
           inset: 0,
           background: isDark
-            ? "linear-gradient(90deg, rgba(251,113,133,0.1), transparent, rgba(251,113,133,0.1))"
-            : "linear-gradient(90deg, rgba(251,113,133,0.05), transparent, rgba(251,113,133,0.05))",
+            ? "linear-gradient(180deg, rgba(96,165,250,0.04), transparent 40%)"
+            : "linear-gradient(180deg, rgba(248,250,252,0.8), transparent 50%)",
           pointerEvents: "none",
           zIndex: 0,
         }}
       />
+
       <Box
+        aria-hidden
         sx={{
           position: "absolute",
           bottom: 0,
@@ -60,20 +63,25 @@ export function PreFooterCtaSection() {
           width: "100%",
           pointerEvents: "none",
           zIndex: 0,
+          lineHeight: 0,
         }}
       >
-        <svg
+        <Box
+          component="svg"
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ width: "100%", height: "250px", display: "block" }}
+          sx={{
+            width: "100%",
+            height: { xs: 160, sm: 200, md: 250 },
+            display: "block",
+          }}
         >
           <path
             fill={isDark ? "rgba(244,114,182,0.15)" : "rgba(251,113,133,0.25)"}
-            fillOpacity="1"
             d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
-        </svg>
+        </Box>
       </Box>
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
@@ -93,8 +101,8 @@ export function PreFooterCtaSection() {
             background: isDark ? "rgba(30, 32, 44, 0.7)" : "#ffffff",
             backdropFilter: isDark ? "blur(20px)" : "none",
             boxShadow: isDark
-              ? "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 60px rgba(96,165,250,0.15)"
-              : "0 20px 40px -10px rgba(0,0,0,0.1), 0 0 60px rgba(37,99,235,0.05)",
+              ? "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+              : "0 20px 40px -10px rgba(15,23,42,0.08)",
           }}
         >
           <Typography

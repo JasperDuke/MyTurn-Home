@@ -4,6 +4,7 @@ export { SectionHeading } from "./SectionHeading";
 export { HeroSection } from "./HeroSection";
 export { ProblemSolutionSection } from "./ProblemSolutionSection";
 export { FeaturesSection } from "./FeaturesSection";
+export { BranchModesSection } from "./BranchModesSection";
 export { GlobalSupportSection } from "./GlobalSupportSection";
 export { LineNotificationsSection } from "./LineNotificationsSection";
 export { HowItWorksSection } from "./HowItWorksSection";
@@ -12,6 +13,7 @@ export { OnboardingSection } from "./OnboardingSection";
 export { CtaSection } from "./CtaSection";
 export { FaqSection } from "./FaqSection";
 export { PreFooterCtaSection } from "./PreFooterCtaSection";
+export { SurveyUrgencySection } from "./SurveyUrgencySection";
 export { Footer } from "./Footer";
 export { BookDemoModal } from "./BookDemoModal";
 

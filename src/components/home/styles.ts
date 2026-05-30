@@ -15,15 +15,36 @@ export function sectionLabelSx(isDark: boolean): SxProps<Theme> {
   };
 }
 
+export function brandGradientCss(isDark: boolean): string {
+  return isDark
+    ? "linear-gradient(135deg, #F472B6 0%, #FB7185 50%, #FB923C 100%)"
+    : "linear-gradient(135deg, #EC4899 0%, #E11D48 50%, #F97316 100%)";
+}
+
 export function gradientHighlightSx(isDark: boolean): SxProps<Theme> {
   return {
-    background: isDark
-      ? "linear-gradient(135deg, #F472B6 0%, #FB7185 50%, #FB923C 100%)"
-      : "linear-gradient(135deg, #EC4899 0%, #E11D48 50%, #F97316 100%)",
+    background: brandGradientCss(isDark),
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",
     fontWeight: 600,
+  };
+}
+
+export function brandIconBadgeSx(isDark: boolean): SxProps<Theme> {
+  return {
+    width: 48,
+    height: 48,
+    borderRadius: "50%",
+    mx: "auto",
+    mb: 2,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    background: brandGradientCss(isDark),
+    color: "#ffffff",
+    transition: "opacity 0.25s ease, max-height 0.25s ease, margin 0.25s ease",
   };
 }
 
