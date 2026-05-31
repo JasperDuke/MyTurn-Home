@@ -4,6 +4,8 @@ import { termsTh } from "./terms/th";
 export const th = {
   nav: {
     bookDemo: "ขอดูเดโม่",
+    menuOpen: "เปิดเมนู",
+    menuClose: "ปิดเมนู",
   },
   logo: {
     tagline: "คิวอัจฉริยะ จัดโต๊ะอย่างมีประสิทธิภาพ",
@@ -231,23 +233,39 @@ export const th = {
     sectionLabel: "ราคา",
     title1: "ราคาเรียบง่าย",
     titleHighlight: "ขยายตามการเติบโตของคุณ",
-    subtitle: "หนึ่งสาขาหรือหลายสาขา—วินัยคิวเดียวกัน แดชบอร์ดรวม",
+    subtitle:
+      "คิดต่อสาขาหลัก สาขาเพิ่มไม่มีค่า Implementation ประหยัดมากขึ้นเมื่อจ่ายราย 6 เดือนหรือรายปี",
+    billingToggleLabel: "รอบการเรียกเก็บเงิน",
+    billingMonthly: "รายเดือน",
+    billingSemiAnnual: "ราย 6 เดือน",
+    billingSemiAnnualShort: "6 ด.",
+    billingAnnual: "รายปี",
+    semiAnnualBadge: "ลด 10%",
+    annualBadge: "คุ้มสุด",
+    perMonth: "/ เดือน",
+    mainBranchLabel: "สาขาหลัก",
+    expansionBranchLabel: "สาขาเพิ่ม",
+    billedYearly: "เรียกเก็บ {total} รายปี",
+    billedSemiAnnual: "เรียกเก็บ {total} ทุก 6 เดือน",
+    savePerYear: "ประหยัด {amount} ต่อปี",
+    savePerPeriod: "ประหยัด {amount} ทุก 6 เดือน",
+    savePercentBadge: "ประหยัด {percent}%",
+    setupFeeMonthly: "+ {amount} ค่า Setup ครั้งเดียว",
+    setupFeeWaived: "$0 ค่า Setup",
+    viewAllFeatures: "ดูฟีเจอร์ทั้งหมด",
+    hideFeatures: "ซ่อนฟีเจอร์",
+    moreFeatures: "+ อีก {count} ฟีเจอร์",
+    recommendedLabel: "แนะนำ",
     comingSoonLabel: "เร็วๆ นี้",
-    startHereLabel: "เริ่มต้นที่นี่",
-    plans: [
-      {
-        name: "Operational Core",
+    guarantee: {
+      title: "สัญญา Founder ปลอดความเสี่ยง",
+      body: "เราเชื่อในพลังของวินัยการดำเนินงานทุกช่วงเร่งด่วน หากคุณรู้สึกว่า MyTurn ไม่ได้เพิ่มคุณค่าให้ร้าน เราคืนเงิน 100% ภายใน 30 วันแรก ไม่ต้องอธิบาย เราอยู่เพื่อช่วยให้คุณประสบความสำเร็จ",
+    },
+    plans: {
+      foundation: {
+        name: "Foundation (Operational Core)",
         badge: "Foundation",
-        price: "$49",
-        priceUnit: "/ เดือน",
-        priceNote: "(ต่อสาขา)",
-        setupFee: {
-          prefix: "+",
-          amount: "$199",
-          badge: "ตลอดชีพ",
-          label: "ค่าบริการติดตั้งและอบรมการใช้งาน — จ่ายครั้งเดียว หยุดและต่อบริการใหม่ได้ตลอดเวลา",
-        },
-        description: "รากฐานสำหรับขจัดความวุ่นวายและจับคู่คิวกับโต๊ะได้อย่างสมบูรณ์แบบ",
+        description: "ชุดเครื่องมือจำเป็นสำหรับจัดการคิวและเพิ่มประสิทธิภาพการใช้ที่นั่ง",
         features: [
           {
             text: "Queue & Flow: คิวไม่จำกัด, ระบบจัดที่นั่งอัจฉริยะแบบ Deterministic และรองรับฮาร์ดแวร์ BYOD ทุกประเภท",
@@ -261,30 +279,23 @@ export const th = {
           {
             text: "Complete Setup: ออกแบบผังร้านตามจริง, บัญชีพนักงาน และอบรมการใช้งานแบบ 1-on-1 รีโมทครบวงจร",
           },
-          {
-            isExpansion: true,
-            label: "Branch Expansion Key",
-            price: "+$29 / เดือน",
-            detail: "ต่อสาขาเพิ่มเติม",
-          },
+          { text: "24/7 Support" },
         ],
-        featured: false,
-        ctaLabel: "เริ่มทดลองใช้ฟรี 2 เดือน",
-        trialSubtext: "ทดลองใช้งานฟรี 100% นาน 60 วัน (ฟรีทั้งค่าแรกเข้าและซอฟต์แวร์) เริ่มคิดเงินเมื่อเลือกใช้งานต่อเท่านั้น",
-        ctaVariant: "secondary" as const,
+        recommended: true,
         comingSoon: false,
+        ctaLabel: "นัดหมายดูเดโม่",
+        trialSubtext:
+          "เริ่มทดลอง Foundation ฟรี 2 เดือน ค่า Implementation & Training และสมัครเมื่อเลือกใช้งานต่อเท่านั้น",
+        ctaVariant: "primary" as const,
       },
-      {
-        name: "AI Copilot (Pro Tier)",
+      pro: {
+        name: "Pro (AI Copilot)",
         badge: "AI Powered",
-        price: "$99",
-        priceUnit: "/ เดือน",
-        priceNote: "(ต่อสาขา)",
-        description: "สำหรับร้านที่มีทราฟฟิกสูง ต้องการคาดการณ์ความต้องการและกู้รายได้ที่สูญเสีย",
+        description: "วิเคราะห์ขั้นสูง คาดการณ์กำลังคน และสร้างดีมานด์อัตโนมัติสำหรับร้านที่มีทราฟฟิกสูง",
         features: [
-          { text: "ทุกอย่างใน Core รวมถึง:" },
+          { text: "ทุกอย่างใน Foundation รวมถึง:" },
           {
-            text: "Consultant AI & Predictive Forecasting: วิเคราะห์และคาดการณ์ปริมาณลูกค้าล่วงหน้า แจ้งเตือนช่วงเวลาเร่งด่วน พร้อมแนะนำแนวทางการทำงานด้วยข้อมูลสถิติ",
+            text: "Consultant AI & Predictive Forecasting: วิเคราะห์และคาดการณ์ปริมาณลูกค้าล่วงหน้า แจ้งเตือนช่วงเร่งด่วน พร้อมแนะนำแนวทางการทำงานด้วยข้อมูลสถิติ",
           },
           {
             text: "Predictive Staffing: แจ้งเตือน traffic spike สำหรับเตรียมครัวด้วย AI",
@@ -292,21 +303,15 @@ export const th = {
           {
             text: "Dynamic Off-Peak Triggers: ส่งโปรโมชัน LINE อัตโนมัติเมื่อโต๊ะว่าง",
           },
-          { text: "Priority Support 24/7" },
-          {
-            isExpansion: true,
-            label: "Branch Expansion Key",
-            price: "+$69 / เดือน",
-            detail: "ต่อสาขาเพิ่มเติม · คิดรายเดือน · จัดการทุกสาขาจาก master dashboard เดียว",
-          },
+          { text: "Priority 24/7 Support" },
         ],
-        featured: true,
+        recommended: false,
+        comingSoon: true,
         ctaLabel: "เร็วๆ นี้",
         trialSubtext: "",
-        ctaVariant: "primary" as const,
-        comingSoon: true,
+        ctaVariant: "secondary" as const,
       },
-    ],
+    },
   },
   surveyUrgency: {
     ariaLabel: "แบบสำรวจพื้นร้าน",
@@ -343,12 +348,12 @@ export const th = {
       {
         question: "โครงสร้างค่าบริการเป็นอย่างไร?",
         answer:
-          "เราเก็บค่า onboarding ครั้งเดียว $199 ครอบคลุมการตั้งบัญชีครบถ้วน การวางผังโต๊ะตามร้านจริง และการอบรมพนักงาน จากนั้นเป็นรายเดือนคงที่ $49 ต่อสาขาสำหรับระบบ Core ไม่มีค่าแอบแฝงหรือสัญญาผูกมัด",
+          "Foundation (Operational Core) เริ่ม $49/เดือนสาขาหลัก ($39/เดือนรายปี) Pro (AI Copilot) เริ่ม $89/เดือน ($75/เดือนรายปี) เมื่อเปิดให้บริการ ค่า Implementation & Training $49 เฉพาะสาขาหลัก ฟรีเมื่อจ่ายรายปี สาขาเพิ่มไม่มีค่านี้",
       },
       {
-        question: "ช่วงทดลองใช้ 2 เดือนฟรีจริงไหม หรือต้องจ่ายค่าแรกเข้า $199 ก่อน?",
+        question: "ช่วงทดลองใช้ 2 เดือนฟรีจริงไหม หรือต้องจ่ายค่า Implementation ก่อน?",
         answer:
-          "ทดลองใช้งานฟรี 100% นาน 2 เดือนโดยไม่มีค่าใช้จ่ายล่วงหน้าใด ๆ คุณจะจ่ายค่าแรกเข้าติดตั้งระบบและอบรมการใช้งาน $199 ก็ต่อเมื่อตัดสินใจใช้งาน MyTurn ต่อหลังจากสิ้นสุดช่วงทดลองใช้ 60 วันแล้วเท่านั้น หากยกเลิกการใช้งานระหว่างช่วงทดลองใช้ จะไม่ต้องจ่ายเลยสักบาท",
+          "ทดลอง Foundation ฟรี 2 เดือน ไม่เรียกเก็บค่า Implementation & Training $49 หรือค่าสมัครจนกว่าจะเลือกใช้งานต่อ จ่ายรายปีได้ค่านี้ฟรี ยกเลิกระหว่างทดลองไม่เสียค่าใช้จ่าย",
       },
       {
         question: "ต้องซื้อตู้คิวหรืออุปกรณ์แพงหรือไม่?",
@@ -368,7 +373,7 @@ export const th = {
       {
         question: "จัดการหลายสาขาได้หรือไม่?",
         answer:
-          "ได้ คุณบริหารทุกสาขาจากแดชบอร์ดกลางอันเดียว และมี Branch Expansion Keys ในราคาพิเศษเมื่อโต เช่น $29 ต่อเดือนสำหรับแพ็ก Core และ $69 ต่อเดือนสำหรับ AI Copilot",
+          "ได้ คุณบริหารทุกสาขาจากแดชบอร์ดกลางอันเดียว สาขาเพิ่ม Foundation $29/เดือน Pro $59/เดือน (ลดลงเมื่อจ่ายราย 6 เดือนหรือรายปี) ไม่มีค่า Implementation",
       },
       {
         question: "ต้องสัญญาระยะยาวหรือไม่?",

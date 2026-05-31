@@ -5,6 +5,13 @@ export const SECTION_PY = { xs: 10, md: 12 } as const;
 export const SECTION_PX = { xs: 2, sm: 3, md: 10 } as const;
 export const SECTION_HEADER_MB = { xs: 5, md: 7 } as const;
 
+/** Pale pink brand band (pricing, survey urgency, etc.) */
+export function brandSectionBackground(isDark: boolean): string {
+  return isDark
+    ? "linear-gradient(180deg, rgba(18, 16, 24, 0.95) 0%, rgba(36, 22, 32, 0.65) 50%, rgba(28, 20, 28, 0.85) 100%)"
+    : "linear-gradient(165deg, #ffffff 0%, #fefcfd 35%, #fdf2f8 70%, #fce7f3 100%)";
+}
+
 export function sectionLabelSx(isDark: boolean): SxProps<Theme> {
   return {
     color: isDark ? "#F472B6" : "#E11D48",

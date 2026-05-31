@@ -4,6 +4,7 @@ import { Box, Button, Container, Stack, Typography, useTheme } from "@mui/materi
 import TrendingDownOutlinedIcon from "@mui/icons-material/TrendingDownOutlined";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import {
+  brandSectionBackground,
   gradientHighlightSx,
   primaryCtaSx,
   sectionLabelSx,
@@ -29,8 +30,10 @@ export function SurveyUrgencySection() {
   const accent = isDark ? "#F472B6" : "#E11D48";
   const panelBorder = isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(0, 0, 0, 0.06)";
   const panelBg = isDark ? "rgba(30, 32, 44, 0.75)" : "#ffffff";
-  const stakeBg = isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(248, 250, 252, 0.9)";
-  const stakeBorder = isDark ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(15, 23, 42, 0.06)";
+  const stakeBg = isDark ? "rgba(255, 255, 255, 0.03)" : "#fdf2f8";
+  const stakeBorder = isDark
+    ? "1px solid rgba(255, 255, 255, 0.08)"
+    : "1px solid rgba(225, 29, 72, 0.12)";
 
   return (
     <Box
@@ -41,22 +44,10 @@ export function SurveyUrgencySection() {
         py: { xs: 7, md: 8 },
         px: SECTION_PX,
         position: "relative",
-        bgcolor: isDark ? "transparent" : "#fdf2f8",
-        borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(236,72,153,0.08)",
+        overflow: "hidden",
+        background: brandSectionBackground(isDark),
       }}
     >
-      <Box
-        aria-hidden
-        sx={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          background: isDark
-            ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(244,114,182,0.08), transparent 70%)"
-            : "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(236,72,153,0.06), transparent 70%)",
-        }}
-      />
-
       <Container maxWidth="md" sx={{ position: "relative" }}>
         <Box
           component={motion.div}
@@ -72,7 +63,7 @@ export function SurveyUrgencySection() {
             backdropFilter: isDark ? "blur(20px)" : "none",
             boxShadow: isDark
               ? "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)"
-              : "0 20px 48px rgba(15,23,42,0.08)",
+              : "0 10px 40px -12px rgba(225,29,72,0.1), 0 20px 48px rgba(15,23,42,0.08)",
           }}
         >
           <Box sx={{ textAlign: "center", mb: { xs: 2.5, md: 3 }, maxWidth: 640, mx: "auto" }}>

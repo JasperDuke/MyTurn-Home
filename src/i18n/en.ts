@@ -4,6 +4,8 @@ import { termsEn } from "./terms/en";
 export const en = {
   nav: {
     bookDemo: "Book a Demo",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
   },
   logo: {
     tagline: "Build the Hype. Hide the Wait.",
@@ -229,24 +231,40 @@ export const en = {
     sectionLabel: "Pricing",
     title1: "Simple Pricing.",
     titleHighlight: "Built to Scale with You.",
-    subtitle: "One branch or many—same queue discipline, shared analytics.",
+    subtitle:
+      "Per main branch. Expansion branches have no implementation fee. Save more with semi-annual or annual billing.",
+    billingToggleLabel: "Billing period",
+    billingMonthly: "Monthly",
+    billingSemiAnnual: "Semi-Annual",
+    billingSemiAnnualShort: "6 mo",
+    billingAnnual: "Annual",
+    semiAnnualBadge: "10% off",
+    annualBadge: "Best value",
+    perMonth: "/ mo",
+    mainBranchLabel: "Main branch",
+    expansionBranchLabel: "Expansion branch",
+    billedYearly: "Billed {total} yearly",
+    billedSemiAnnual: "Billed {total} every 6 months",
+    savePerYear: "Save {amount} a year",
+    savePerPeriod: "Save {amount} every 6 months",
+    savePercentBadge: "Save {percent}%",
+    setupFeeMonthly: "+ {amount} One-time Setup Fee",
+    setupFeeWaived: "$0 Setup Fee",
+    viewAllFeatures: "View all features",
+    hideFeatures: "Hide features",
+    moreFeatures: "+ {count} more features",
+    recommendedLabel: "Recommended",
     comingSoonLabel: "Coming Soon",
-    startHereLabel: "Start Here",
-    plans: [
-      {
-        name: "Operational Core",
+    guarantee: {
+      title: "Risk-Free Founder’s Promise",
+      body: "We believe in the power of operational discipline for every rush. If you ever feel that MyTurn is not adding value to your restaurant, we offer a 100% money-back guarantee within the first 30 days. No questions asked. We’re here to help you succeed.",
+    },
+    plans: {
+      foundation: {
+        name: "Foundation (Operational Core)",
         badge: "Foundation",
-        price: "$49",
-        priceUnit: "/ month",
-        priceNote: "(per branch)",
-        setupFee: {
-          prefix: "+",
-          amount: "$199",
-          badge: "Lifetime",
-          label: "Implementation & Training Fee — pay once, pause & resume anytime",
-        },
         description:
-          "The foundation for eliminating chaos and perfectly matching queues to tables.",
+          "The essential toolkit for managing waitlists and optimizing chair utilization.",
         features: [
           {
             text: "Queue & Flow: Unlimited queues, Deterministic Table Matching, and BYOD hardware support.",
@@ -260,29 +278,22 @@ export const en = {
           {
             text: "Complete Setup: Custom floor mapping, staff accounts, and 1-on-1 remote training included.",
           },
-          {
-            isExpansion: true,
-            label: "Branch Expansion Key",
-            price: "+$29 / month",
-            detail: "per additional branch",
-          },
+          { text: "24/7 Support" },
         ],
-        featured: false,
-        ctaLabel: "Start 2-Month Free Trial",
-        trialSubtext: "Onboarding & software are 100% free for 60 days. Pay setup & monthly fees only if you decide to continue.",
-        ctaVariant: "secondary" as const,
+        recommended: true,
         comingSoon: false,
+        ctaLabel: "Book a Demo",
+        trialSubtext:
+          "Start with Foundation on a 2-month free trial. Implementation fee & subscription apply only if you continue.",
+        ctaVariant: "primary" as const,
       },
-      {
-        name: "AI Copilot (Pro Tier)",
+      pro: {
+        name: "Pro (AI Copilot)",
         badge: "AI Powered",
-        price: "$99",
-        priceUnit: "/ month",
-        priceNote: "(per branch)",
         description:
-          "For high-traffic venues that want to actively predict demand and recover lost revenue.",
+          "Advanced analytics, predictive staffing, and automated demand generation for busy venues.",
         features: [
-          { text: "Everything in Core, plus:" },
+          { text: "Everything in Foundation, plus:" },
           {
             text: "Consultant AI & Predictive Forecasting: Smart peak-hour predictions, bottleneck prevention alerts, and data-driven operational suggestions.",
           },
@@ -293,20 +304,14 @@ export const en = {
             text: "Dynamic Off-Peak Triggers: Auto-send targeted LINE promotions when tables are empty.",
           },
           { text: "Priority 24/7 Support" },
-          {
-            isExpansion: true,
-            label: "Branch Expansion Key",
-            price: "+$69 / month",
-            detail: "per additional branch · billed monthly · one master dashboard for all locations",
-          },
         ],
-        featured: true,
+        recommended: false,
+        comingSoon: true,
         ctaLabel: "Coming Soon",
         trialSubtext: "",
-        ctaVariant: "primary" as const,
-        comingSoon: true,
+        ctaVariant: "secondary" as const,
       },
-    ],
+    },
   },
   surveyUrgency: {
     ariaLabel: "Restaurant floor survey",
@@ -343,12 +348,12 @@ export const en = {
       {
         question: "What is the pricing structure?",
         answer:
-          "We charge a one-time onboarding fee of $199. This covers your complete account setup, custom table layout mapping, and staff training. After that, it is a flat $49/month per branch for the Core system, with no hidden fees or contracts.",
+          "Foundation (Operational Core) starts at $49/mo for your main branch ($39/mo on annual billing). Pro (AI Copilot) starts at $89/mo ($75/mo annually) when available. A one-time $49 Implementation & Training Fee applies to the main branch only—waived on annual plans. Expansion branches have no implementation fee.",
       },
       {
-        question: "Is the 2-month trial completely free, or do I have to pay the $199 setup fee upfront?",
+        question: "Is the 2-month trial completely free, or do I pay the implementation fee upfront?",
         answer:
-          "It is 100% free for 2 months. You do not pay anything upfront. The one-time $199 implementation and training fee is only billed if you choose to continue using MyTurn after your 60-day trial. If you cancel during the trial, you pay absolutely nothing.",
+          "Foundation’s 2-month trial is free. You are not charged the $49 Implementation & Training Fee or subscription unless you choose to continue. Annual subscribers also get that fee waived. Cancel during the trial and you pay nothing.",
       },
       {
         question: "Do I need to buy expensive kiosks or hardware?",
@@ -368,7 +373,7 @@ export const en = {
       {
         question: "Can I manage multiple branches?",
         answer:
-          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. We offer discounted Branch Expansion Keys ($29/month for Core, $69/month for AI Copilot) as you grow.",
+          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. Expansion branches are $29/mo on Foundation and $59/mo on Pro (lower on semi-annual and annual billing)—with no implementation fee.",
       },
       {
         question: "Am I locked into a long-term contract?",
