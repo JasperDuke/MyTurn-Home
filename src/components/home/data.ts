@@ -21,10 +21,10 @@ export const featureCards = [
     footerValue: "+18%",
   },
   {
-    title: "Mobile App Booking",
-    description: "Allow customers to book their table while on the way, increasing reliability and expanding your reach.",
-    footerLabel: "Customer Reach",
-    footerValue: "+35%",
+    title: "Get Queue from Home",
+    description: "Allow guests to join the queue online before they arrive—no walking to the counter needed.",
+    footerLabel: "Status",
+    footerValue: "Coming Soon",
   },
 ];
 

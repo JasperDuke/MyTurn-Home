@@ -1,6 +1,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --header-offset: 74px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section[id] {
+  scroll-margin-top: var(--header-offset);
 }
 
 @media (prefers-color-scheme: dark) {

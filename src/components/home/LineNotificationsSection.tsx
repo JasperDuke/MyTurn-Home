@@ -29,10 +29,9 @@ export function LineNotificationsSection() {
 
   return (
     <Box
-      component="section"
       sx={{
-        py: { xs: 10, md: 14 },
-        px: 2,
+        py: { xs: 10, md: 12 },
+        px: { xs: 2, sm: 3 },
         position: "relative",
         bgcolor: sectionBg,
         borderTop: isDark ? `1px solid ${borderSubtle}` : "none",
@@ -64,7 +63,7 @@ export function LineNotificationsSection() {
             }}
           >
             <ProductShot
-              src="/line-1.png"
+              src="/assets/line-1.jpg"
               alt="LINE chat — upper half showing MyTurn queue updates"
               naturalSize
               objectFit="contain"
@@ -79,7 +78,7 @@ export function LineNotificationsSection() {
               }}
             />
             <ProductShot
-              src="/line-2.png"
+              src="/assets/Line-2.jpg"
               alt="LINE chat — lower half showing MyTurn queue updates"
               naturalSize
               objectFit="contain"

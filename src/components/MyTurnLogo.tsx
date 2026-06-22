@@ -3,6 +3,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import type { SxProps, Theme } from "@mui/material/styles";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import Link from "next/link";
 
 export default function MyTurnLogo({
   iconSize = 54,
@@ -22,15 +23,17 @@ export default function MyTurnLogo({
   const { t } = useLanguage();
 
   return (
-    <Box
-      sx={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 1.5,
-        minWidth: 0,
-        ...sx,
-      }}
-    >
+    <Link href="/" passHref style={{ textDecoration: "none", color: "inherit", display: "inline-flex" }}>
+      <Box
+        sx={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 1.5,
+          cursor: "pointer",
+          minWidth: 0,
+          ...sx,
+        }}
+      >
       <Box
         component="img"
         src="/3.png"
@@ -80,5 +83,6 @@ export default function MyTurnLogo({
         ) : null}
       </Box>
     </Box>
-  );
+  </Link>
+);
 }

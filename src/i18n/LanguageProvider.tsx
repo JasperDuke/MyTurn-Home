@@ -1,11 +1,19 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { en } from "./en";
 import { th } from "./th";
 
 type Locale = "en" | "th";
 export type Dictionary = typeof en;
+
+function getInitialLocale(): Locale {
+  if (typeof window === "undefined") return "en";
+  const saved = localStorage.getItem("preferred-locale");
+  if (saved === "en" || saved === "th") return saved;
+  if (navigator.language.toLowerCase().startsWith("th")) return "th";
+  return "en";
+}
 
 interface LanguageContextType {
   locale: Locale;
@@ -16,19 +24,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("preferred-locale") as Locale;
-    if (saved && (saved === "en" || saved === "th")) {
-      setLocaleState(saved);
-    } else {
-      const browserLang = navigator.language.toLowerCase();
-      if (browserLang.startsWith("th")) {
-        setLocaleState("th");
-      }
-    }
-  }, []);
+  const [locale, setLocaleState] = useState<Locale>(getInitialLocale);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);

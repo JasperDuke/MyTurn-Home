@@ -1,149 +1,399 @@
+import { privacyEn } from "./privacy/en";
+import { termsEn } from "./terms/en";
+
 export const en = {
   nav: {
     bookDemo: "Book a Demo",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
   },
   logo: {
-    tagline: "Smart Queues. Optimized Seating.",
+    tagline: "Build the Hype. Hide the Wait.",
   },
   hero: {
-    tagline: "Smart Queues. Optimized Seating.",
-    title1: "The Peak-Hour",
-    titleHighlight: "Revenue Optimization",
-    title2: "Engine",
-    subtitle: "We don't just track money—we increase your capacity to earn it. Optimize table flow, eliminate idle gaps, and maximize throughput for high-traffic restaurants.",
-    bookDemo: "Book a Demo",
-    learnMore: "Learn More",
-    trialBadge: "🎉 2 Months Free Trial • Zero Setup Cost",
+    tagline: "Smart queue management",
+    title1: "Build the hype.",
+    titleHighlight: "Hide the wait.",
+    title2: "",
+    subtitle:
+      "Match the right party to the right table, cut idle gaps, and run peak service with calm, predictable queue flow.",
+    startTrial: "View pricing",
+    bookDemo: "Book a demo",
+    ctaNote: "2-month free trial on your first branch · No credit card",
+    trialBadge: "2-Month Free Trial",
   },
   problemSolution: {
-    sectionLabel: "Problem & solution",
-    title1: "From chaos at the door to",
-    titleHighlight: "disciplined flow",
-    subtitle: "The same peak-hour ceiling—solved with a clear queue lifecycle and a staff view that never goes blank.",
-    problemLabel: "Problem",
-    problemTitle: "Peak-hour revenue is capped by tables and turn time",
-    problemDesc: "When you're always full, the only lever you control is operational efficiency—yet chaos at the door quietly bleeds capacity every service.",
-    problemBullets: [
-      "Idle gaps of just 1–3 minutes compound into major lost revenue every peak service.",
-      "Unpredictable waitlists and no-shows frustrate staff and guests alike.",
-      "Mismatched seating wastes structural capacity when every seat counts.",
+    sectionLabel: "The problem",
+    title1: "Peak hour breaks when",
+    titleHighlight: "space and time misalign",
+    problemLabel: "The problem",
+    problemTitle: "Three leaks at the door",
+    problemDesc:
+      "Manual lists and guesswork create friction exactly when every seat counts.",
+    problemItems: [
+      {
+        tag: "Wait times",
+        title: "Unpredictable waits",
+        text: "Guests bail when estimates feel wrong—before they ever sit down.",
+      },
+      {
+        tag: "Idle gaps",
+        title: "Slow turn cycles",
+        text: "Minutes lost between “table ready” and the next seating add up fast.",
+      },
+      {
+        tag: "Seating",
+        title: "Mismatched parties",
+        text: "A two-top at a four-top keeps the line moving but wastes capacity.",
+      },
     ],
-    solutionLabel: "Solution",
-    solutionTitle1: "MyTurn is the",
-    solutionHighlight: "operational discipline layer",
-    solutionDesc: "Enforce a deterministic queue and seating flow so you recover minutes of idle gap per cycle—without adding tables or extending hours.",
-    solutionBullets: [
-      "Table-driven lifecycle: WAITING → CALLED → SEATED → FINISHED.",
-      "Deterministic no-show handling—snooze, expire, and prioritize who's actually there.",
-      "A staff dashboard with per-category clarity—no blank screens, no guesswork.",
+    solutionLabel: "The solution",
+    solutionTitle1: "Operational discipline for",
+    solutionHighlight: "every rush",
+    solutionDesc:
+      "MyTurn is a queue engine for restaurants—not a generic waitlist. Deterministic rules, smart matching, and live floor visibility in one flow.",
+    solutionFeatures: [
+      {
+        title: "Clear queue lifecycle",
+        text: "WAITING → CALLED → SEATED → FINISHED with LINE updates and auto no-show handling.",
+      },
+      {
+        title: "Smart table matching",
+        text: "Seat the best-fit party the moment a table clears—fewer idle gaps between turns.",
+      },
+      {
+        title: "Live floor visibility",
+        text: "Track ready-to-seated time and throughput so every rush gets measurably tighter.",
+      },
     ],
-    outcomesLabel: "Key outcomes",
-    outcomes: [
-      { label: "Tighter table turns", sub: "Less idle time between parties" },
-      { label: "Happier guests & staff", sub: "Predictable flow under pressure" },
-      { label: "Operations you can tune", sub: "Metrics that expose what to fix next" },
-    ]
   },
   features: {
     sectionLabel: "Core Features",
-    title1: "Systematize your",
-    titleHighlight: "Peak Hours",
-    subtitle: "Replace disjointed notebooks and generic waiting list apps with an engine built specifically for restaurant capacity maximization.",
+    title1: "Built for",
+    titleHighlight: "peak-hour ops",
+    subtitle: "Everything your host stand needs to seat faster, waste fewer tables, and keep guests informed.",
     cards: [
       {
         title: "Deterministic Queue Logic",
-        description: "No more guesswork. A clear WAITING → CALLED → SEATED → FINISHED lifecycle with automated expiration for no-shows.",
+        description: "Enforce a structured customer journey (Waiting → Called → Seated → Finished) with automated no-show detection and status syncing.",
         footerLabel: "No-Show Rate",
         footerValue: "-45%",
       },
       {
         title: "Smart Recommendations",
-        description: "When a table becomes ready, our system suggests the best matched party to minimize wasted seats.",
-        footerLabel: "Utilization Rate",
+        description: "Instantly suggest the ideal party size the moment a table clears to maximize seat utilization and occupancy.",
+        footerLabel: "Utilization",
         footerValue: "98%",
       },
       {
         title: "Idle Gap Analytics",
-        description: "Measure your average time between 'table ready' and 'next seating' to prove your operational improvements.",
+        description: "Monitor the critical minutes between a table clearing and the next seating to reclaim lost capacity and increase daily turns.",
         footerLabel: "Throughput",
         footerValue: "+18%",
       },
       {
-        title: "Adaptive Seating Engine (AES)",
-        description: "Automatically detects traffic to swap between Free, Normal, and Peak modes. Dynamically adjusts table-splitting rules and no-show wait times based on real-time conditions.",
-        footerLabel: "Adaptability",
-        footerValue: "100%",
+        title: "AI Owner Copilot",
+        description: "Unlock predictive staffing alerts, bottleneck forecasting, and automated off-peak LINE promotions.",
+        footerLabel: "AI Copilot",
+        footerValue: "Pro Tier",
       },
       {
         title: "Queue Autopilot",
-        description: "Let the system drive during peak chaos. It automatically finds the perfect table match and calls the next guest. Staff simply click 'Confirm Seating', drastically reducing workload.",
-        footerLabel: "Staff Actions",
+        description: "Automate table assignments by letting the system suggest the next optimal party for staff to confirm with a single tap.",
+        footerLabel: "Staff taps",
         footerValue: "-80%",
       },
       {
-        title: "Mobile App Booking",
-        description: "Allow customers to book their table while on the way, increasing reliability and expanding your reach.",
-        footerLabel: "Customer Reach",
-        footerValue: "+35%",
+        title: "Get Queue from Home",
+        description: "Allow guests to secure a spot in line remotely via mobile web, reducing physical host stand congestion and walkaways.",
+        footerLabel: "Status",
+        footerValue: "Coming Soon",
       }
     ]
   },
+  branchModes: {
+    sectionLabel: "Branch floor modes",
+    title1: "Fixed tables or",
+    titleHighlight: "flexible seating",
+    subtitle:
+      "Every branch picks one mode at setup—table-mapped discipline or party-first flow for dynamic floors.",
+    imageAlt: "MyTurn create-branch screen to choose Fixed mode or Flex mode",
+    supportLine:
+      "Dynamic seating with no table map? Flex mode keeps your queue structured and efficient—without Autopilot.",
+    fixed: {
+      badge: "Fixed mode",
+      title: "Table map & pax-driven flow",
+      description:
+        "Table map, split seating, and Autopilot driven by each table's stock and capacity.",
+      recommendedLabel: "Recommended for",
+      tags: ["Hotpot", "BBQ", "Café"],
+      bullets: [
+        "Full table mapping tied to party size (pax)",
+        "Smart seat matching when tables turn",
+        "Queue Autopilot and table-level insights",
+      ],
+    },
+    flex: {
+      badge: "Flex mode",
+      title: "Party-size queue, dynamic seating",
+      description:
+        "Party-size queue only—when a table frees, staff seat the next group by headcount (4, 5, 6…) with quick-spot actions.",
+      recommendedLabel: "Recommended for",
+      tags: ["Hawker", "Stall", "Quick service"],
+      bullets: [
+        "Queue by party size—no fixed table assignment",
+        "Fast call-and-seat workflow for compact floors",
+        "Deterministic queue rules without a floor map",
+      ],
+      note: "Autopilot is not available in Flex mode; you still get an efficient, structured queue system.",
+    },
+  },
   howItWorks: {
     sectionLabel: "How It Works",
-    title1: "From Waiting to",
-    titleHighlight: "Simple Steps",
+    title1: "4 Steps to",
+    titleHighlight: "Total Floor Discipline",
     steps: [
-      { title: "Table-Driven Setup", description: "Define your structured table categories with exact capacities." },
-      { title: "Manage The Flow", description: "Track waiting, dining, and ready counts with a clear dashboard." },
-      { title: "Optimize Real-Time", description: "Use the smart suggestion engine to seat the exact right party next." },
-      { title: "Gain Intelligence", description: "Review your idle gap and throughput metrics to unlock new insights." }
+      { title: "Map Your Floor", description: "Quickly layout your table categories and exact capacities in minutes." },
+      { title: "Streamline the Queue", description: "Track waiting, dining, and ready states directly from a single intuitive dashboard." },
+      { title: "Algorithmic Seating", description: "Let our smart suggestion engine instantly seat the perfect party next." },
+      { title: "Capture Wasted Revenue", description: "Review idle gap metrics and unlock hidden capacity during every shift." }
     ]
   },
   globalSupport: {
     sectionLabel: "Global Support",
     title1: "Designed for",
-    titleHighlight: "diverse guests",
-    subtitle: "Built to handle tourist-heavy areas effortlessly, letting customers queue and follow updates in their native language.",
+    titleHighlight: "diverse venues",
+    subtitle: "Built to support multicultural operators while keeping guest check-ins friction-free.",
     features: [
-      { title: "Multilingual Queue Screens", description: "Customers see wait times and queue updates in their preferred language. English, Thai, 简体中文, and 繁體中文 supported." },
-      { title: "Auto-translated Menus", description: "Seamlessly integrate your digital menu so guests can browse in their language while waiting." },
-      { title: "Zero-Friction Interface", description: "No app download required for guests. They scan a QR code and track their queue status via the web instantly." }
-    ]
+      {
+        title: "Multilingual Operator Panel",
+        description: "Staff can manage queues, table layouts, and settings in English, Thai, Simplified Chinese, or Traditional Chinese.",
+      },
+      {
+        title: "Web & LINE QR Check-In",
+        description: "Guests scan a QR code to check in instantly via any mobile browser or inside LINE. Zero friction, no app download.",
+      },
+      {
+        title: "Universal Queue Numbers",
+        description: "Guest-facing screens and notifications display numbers in English, ensuring clear communication with international tourists.",
+      },
+    ],
   },
   lineIntegration: {
     sectionLabel: "Customer Communication",
     title1: "Connect on",
     titleHighlight: "LINE",
-    subtitle: "Send real-time queue updates directly to customers in LINE—the channel they already trust. Fewer missed calls, clearer expectations, and a smoother handoff from waitlist to table.",
+    subtitle: "Queue updates in LINE—the channel your guests already check all day.",
     features: [
-      { title: "Real-Time Queue Updates", description: "Customers know their exact queue position and when their table will be ready." },
-      { title: "Familiar Platform", description: "LINE is the #1 messaging app in Thailand—guests already use it every day." },
-      { title: "Reduce No-Shows", description: "Timely nudges help parties show up on time and keep your floor moving." },
-      { title: "Improve Customer Satisfaction", description: "Transparent communication builds trust before they even sit down." }
+      { title: "Live queue position", description: "Guests see place in line and ready-time estimates." },
+      { title: "Built for Thailand", description: "LINE is the default channel—no new habit to learn." },
+      { title: "Fewer no-shows", description: "Timely nudges keep parties showing up on time." }
     ]
   },
+  onboarding: {
+    sectionLabel: "Lightning-Fast Deployment",
+    title1: "From Zero to Live in",
+    titleHighlight: "10 Minutes",
+    subtitle: "Three steps. No IT project. Live before your next rush.",
+    steps: [
+      {
+        title: "Choose Your Layout",
+        subtitle: "Table Configuration",
+        description:
+          "Pick a venue preset (Café, Hotpot, BBQ, Casual) and fine-tune table categories to your floor plan.",
+      },
+      {
+        title: "Set the Rules",
+        subtitle: "Hours & Queue Logic",
+        description:
+          "Set hours, peak modes, and no-show timers—MyTurn handles the rest.",
+      },
+      {
+        title: "Monetize the Idle Screen",
+        subtitle: "TV Display Ads",
+        description:
+          "Play promos on waiting-area TVs when the queue is empty.",
+      },
+    ],
+  },
+  vision: {
+    sectionLabel: "Our Vision",
+    title1: "Beyond the Queue:",
+    titleHighlight: "The Future of Operations",
+    subtitle:
+      "MyTurn is the flagship product of HawDi Technologies. We started by building the operational discipline layer to solve the hardest bottleneck in F&B: peak-hour capacity. But organizing the waitlist is just the foundation.",
+    description1:
+      "We are actively evolving MyTurn into an intelligent Space-Time Allocation Engine. By leveraging operational data, our upcoming pipeline includes predictive peak-hour staffing analytics, dynamic off-peak demand generation, and an AI-driven Owner Copilot.",
+    boldStatement:
+      "We don't just manage your data. We are building the intelligence to actively optimize your capacity and throughput in the real world.",
+  },
   cta: {
+    sectionLabel: "Pricing",
+    title1: "Simple Pricing.",
+    titleHighlight: "Built to Scale with You.",
+    subtitle:
+      "Per main branch. Expansion branches have no implementation fee. Save more with semi-annual or annual billing.",
+    billingToggleLabel: "Billing period",
+    billingMonthly: "Monthly",
+    billingSemiAnnual: "Semi-Annual",
+    billingSemiAnnualShort: "6 mo",
+    billingAnnual: "Annual",
+    semiAnnualBadge: "10% off",
+    annualBadge: "Best value",
+    perMonth: "/ mo",
+    mainBranchLabel: "Main branch",
+    expansionBranchLabel: "Expansion branch",
+    billedYearly: "Billed {total} yearly",
+    billedSemiAnnual: "Billed {total} every 6 months",
+    savePerYear: "Save {amount} a year",
+    savePerPeriod: "Save {amount} every 6 months",
+    savePercentBadge: "Save {percent}%",
+    setupFeeMonthly: "+ {amount} One-time Setup Fee",
+    setupFeeWaived: "$0 Setup Fee",
+    viewAllFeatures: "View all features",
+    hideFeatures: "Hide features",
+    moreFeatures: "+ {count} more features",
+    recommendedLabel: "Recommended",
+    comingSoonLabel: "Coming Soon",
+    guarantee: {
+      title: "Risk-Free Founder’s Promise",
+      body: "We believe in the power of operational discipline for every rush. If you ever feel that MyTurn is not adding value to your restaurant, we offer a 100% money-back guarantee within the first 30 days. No questions asked. We’re here to help you succeed.",
+    },
+    plans: {
+      foundation: {
+        name: "Foundation (Operational Core)",
+        badge: "Foundation",
+        description:
+          "The essential toolkit for managing waitlists and optimizing chair utilization.",
+        features: [
+          {
+            text: "Queue & Flow: Unlimited queues, Deterministic Table Matching, and BYOD hardware support.",
+          },
+          {
+            text: "Customer Comms: LINE & Telegram notifications, plus automated feedback tracking.",
+          },
+          {
+            text: "Advanced Analytics: Nightly breakdown of peak-hour performance and idle gaps.",
+          },
+          {
+            text: "Complete Setup: Custom floor mapping, staff accounts, and 1-on-1 remote training included.",
+          },
+          { text: "24/7 Support" },
+        ],
+        recommended: true,
+        comingSoon: false,
+        ctaLabel: "Book a Demo",
+        trialSubtext:
+          "Start with Foundation on a 2-month free trial. Implementation fee & subscription apply only if you continue.",
+        ctaVariant: "primary" as const,
+      },
+      pro: {
+        name: "Pro (AI Copilot)",
+        badge: "AI Powered",
+        description:
+          "Advanced analytics, predictive staffing, and automated demand generation for busy venues.",
+        features: [
+          { text: "Everything in Foundation, plus:" },
+          {
+            text: "Consultant AI & Predictive Forecasting: Smart peak-hour predictions, bottleneck prevention alerts, and data-driven operational suggestions.",
+          },
+          {
+            text: "Predictive Staffing: AI-driven traffic spike alerts for kitchen prep.",
+          },
+          {
+            text: "Dynamic Off-Peak Triggers: Auto-send targeted LINE promotions when tables are empty.",
+          },
+          { text: "Priority 24/7 Support" },
+        ],
+        recommended: false,
+        comingSoon: true,
+        ctaLabel: "Coming Soon",
+        trialSubtext: "",
+        ctaVariant: "secondary" as const,
+      },
+    },
+  },
+  surveyUrgency: {
+    ariaLabel: "Restaurant floor survey",
+    sectionLabel: "Before you leave",
+    titleLine1: "Every rush you run blind",
+    titleLine2: "bleeds revenue",
+    subtitle:
+      "If you won't tell us what breaks at your door, you're choosing to keep losing covers. Two minutes—one honest snapshot of your floor—or keep paying for chaos you never measured.",
+    stakes: [
+      "Idle gaps you don't track compound into lost covers every peak service",
+      "No survey means no tailored fix—we can't show you what you're leaving on the table",
+      "Walk away now and competitors tighten flow while you keep guessing",
+    ],
+    cta: "Take the 2-minute survey now",
+    urgencyNote: "Do it now. Waiting is choosing to lose money you can't see yet.",
+    contactHint: "Rather talk first? Book a demo below—we'll still ask what's breaking your floor.",
+  },
+  closingCta: {
     sectionLabel: "Simple, per-branch monthly fee • Unlimited Seats",
     title1: "Ready to stop",
     titleHighlight: "losing capacity?",
     subtitle: "Join top-tier restaurants using MyTurn to squeeze every dollar out of their peak hours.",
-    button1: "Book Your Demo",
-    button2: "View Pricing",
     bookDemo: "Book a Demo",
     contactSales: "Contact Sales",
-    trialText: "🎉 Start with a 2-month free trial. Zero setup cost.",
-    bullets: ["Unlimited seats & devices", "Cancel anytime", "24/7 priority support"]
+    trialText: "🚀 Start with a 2-month free trial.",
+    bullets: ["Unlimited seats & devices", "Cancel anytime", "24/7 priority support"],
+  },
+  faq: {
+    sectionLabel: "FAQ",
+    title1: "Frequently Asked",
+    titleHighlight: "Questions",
+    subtitle: "Quick answers before you start your trial.",
+    items: [
+      {
+        question: "What is the pricing structure?",
+        answer:
+          "Foundation (Operational Core) starts at $49/mo for your main branch ($39/mo on annual billing). Pro (AI Copilot) starts at $89/mo ($75/mo annually) when available. A one-time $49 Implementation & Training Fee applies to the main branch only—waived on annual plans. Expansion branches have no implementation fee.",
+      },
+      {
+        question: "Is the 2-month trial completely free, or do I pay the implementation fee upfront?",
+        answer:
+          "Foundation’s 2-month trial is free. You are not charged the $49 Implementation & Training Fee or subscription unless you choose to continue. Annual subscribers also get that fee waived. Cancel during the trial and you pay nothing.",
+      },
+      {
+        question: "Do I need to buy expensive kiosks or hardware?",
+        answer:
+          "Not at all. MyTurn is completely hardware-agnostic. You can run the dashboard on any existing iPad, Android tablet, or computer. Our waiting area display feature also works directly on any standard Smart TV.",
+      },
+      {
+        question: "Does it support local messaging apps?",
+        answer:
+          "Yes. MyTurn fully integrates with LINE notifications and web-based queue tracking so customers can monitor their status anywhere, without needing to download a new app.",
+      },
+      {
+        question: "What if a customer doesn't have a smartphone to scan the QR code?",
+        answer:
+          "No problem. Your host can manually enter their name and party size into the tablet. The customer can then simply relax and watch the waiting area TV display to see when their queue number is called.",
+      },
+      {
+        question: "Can I manage multiple branches?",
+        answer:
+          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. Expansion branches are $29/mo on Foundation and $59/mo on Pro (lower on semi-annual and annual billing)—with no implementation fee.",
+      },
+      {
+        question: "Am I locked into a long-term contract?",
+        answer:
+          "No. MyTurn operates on a simple month-to-month subscription. You can upgrade, add branches, or cancel at any time without penalty.",
+      },
+    ],
   },
   footer: {
-    tagline: "Smart Queues. Optimized Seating. · MyTurn Engine",
+    tagline: "Build the Hype. Hide the Wait. · MyTurn Engine",
     description: "The Peak-Hour Revenue Optimization Engine for busy restaurants. Serve more customers, maximize every hour.",
+    companyName: "HawDi Technologies",
+    address: "Bangkok, Thailand",
     hawdi: "A product of HawDi Technologies",
     columns: [
       { title: "Product", links: ["Features", "Pricing", "Book a Demo"] },
       { title: "Resources", links: ["Help Center", "API Documentation", "System Status"] },
       { title: "Company", links: ["About Us", "Contact", "Privacy Policy"] }
     ],
-    rights: "© 2026 MyTurn Inc. All rights reserved.",
+    rights: "© 2026 HawDi Technologies. All rights reserved.",
     links: {
       "Features": "Features",
       "How It Works": "How It Works",
@@ -156,7 +406,7 @@ export const en = {
     }
   },
   modal: {
-    tagline: "Smart Queues. Optimized Seating.",
+    tagline: "Build the Hype. Hide the Wait.",
     title1: "Book a",
     titleHighlight: "Demo",
     subtitle: "See how MyTurn can maximize your table throughput and completely eliminate the idle gap.",
@@ -180,15 +430,7 @@ export const en = {
       fullstack_research: "Fullstack Developer\nUX Research",
       fullstack_marketing: "Fullstack Developer\nProduct Marketing",
     },
-    companyInfo: {
-      sectionLabel: "Our Vision",
-      title1: "Beyond the",
-      titleHighlight: "Queue",
-      subtitle: "MyTurn is the flagship product of HawDi Technologies, founded in 2026.",
-      description1: "HawDi Technologies is an engineering startup dedicated to building high-performance optimization engines across multiple industries. We started by tackling the hardest operational bottleneck in F&B: the peak-hour capacity problem.",
-      description2: "But our vision extends far beyond a queue system. We are actively developing deep integrations with existing POS platforms to introduce seamless pre-ordering and fully automated seating workflows. Ultimately, this ecosystem will be unified under our upcoming financial infrastructure: HawDi Payment.",
-      missionTitle: "Our Mission",
-      missionDesc: "To build software that doesn't just manage data, but actively optimizes operations and throughput in the real world."
-    }
-  }
+  },
+  privacy: privacyEn,
+  terms: termsEn,
 };
