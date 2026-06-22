@@ -42,7 +42,7 @@ export function HeroSection() {
   const isDark = theme.palette.mode === "dark";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useLanguage();
-  const cockpitSrc = "/assets/cockpit.png";
+  const cockpitSrc = "/assets/cockpit-new.png";
 
   return (
     <Box
