@@ -1,19 +1,32 @@
 "use client";
 
-import { Box, Container, Chip, Stack, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Container,
+  Chip,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import TableRestaurantOutlinedIcon from "@mui/icons-material/TableRestaurantOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { ProductShot } from "@/components/home/ProductShot";
 import { SectionHeading } from "@/components/home/SectionHeading";
 import { SECTION_PX } from "@/components/home/styles";
+import { HEADER_OFFSET_PX } from "@/lib/scroll";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { motion, Variants } from "framer-motion";
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 280, damping: 26 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 280, damping: 26 },
+  },
 };
 
 type ModeCardProps = {
@@ -39,10 +52,14 @@ function ModeCard({
   icon: Icon,
   isDark,
 }: ModeCardProps) {
-  const border = isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(15, 23, 42, 0.08)";
+  const border = isDark
+    ? "1px solid rgba(255, 255, 255, 0.1)"
+    : "1px solid rgba(15, 23, 42, 0.08)";
   const cardBg = isDark ? "rgba(30, 32, 44, 0.75)" : "#ffffff";
   const labelColor = isDark ? "#F472B6" : "#E11D48";
-  const tagBg = isDark ? "rgba(244, 114, 182, 0.14)" : "rgba(225, 29, 72, 0.08)";
+  const tagBg = isDark
+    ? "rgba(244, 114, 182, 0.14)"
+    : "rgba(225, 29, 72, 0.08)";
   const tagColor = isDark ? "#fbcfe8" : "#be123c";
 
   return (
@@ -72,28 +89,61 @@ function ModeCard({
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
-            bgcolor: isDark ? "rgba(244, 114, 182, 0.12)" : "rgba(225, 29, 72, 0.08)",
+            bgcolor: isDark
+              ? "rgba(244, 114, 182, 0.12)"
+              : "rgba(225, 29, 72, 0.08)",
             color: labelColor,
           }}
         >
           <Icon sx={{ fontSize: 22 }} />
         </Box>
         <Box sx={{ minWidth: 0 }}>
-          <Typography sx={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase", color: labelColor }}>
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              color: labelColor,
+            }}
+          >
             {badge}
           </Typography>
-          <Typography sx={{ mt: 0.35, fontSize: { xs: "1rem", sm: "1.05rem" }, fontWeight: 700, lineHeight: 1.3, color: "text.primary" }}>
+          <Typography
+            sx={{
+              mt: 0.35,
+              fontSize: { xs: "1rem", sm: "1.05rem" },
+              fontWeight: 700,
+              lineHeight: 1.3,
+              color: "text.primary",
+            }}
+          >
             {title}
           </Typography>
         </Box>
       </Box>
 
-      <Typography sx={{ mt: 1.25, fontSize: 13, lineHeight: 1.55, color: "text.secondary", fontWeight: 500 }}>
+      <Typography
+        sx={{
+          mt: 1.25,
+          fontSize: 13,
+          lineHeight: 1.55,
+          color: "text.secondary",
+          fontWeight: 500,
+        }}
+      >
         {description}
       </Typography>
 
       <Box sx={{ mt: 1.75 }}>
-        <Typography sx={{ fontSize: 11, fontWeight: 700, color: "text.secondary", mb: 0.75 }}>
+        <Typography
+          sx={{
+            fontSize: 11,
+            fontWeight: 700,
+            color: "text.secondary",
+            mb: 0.75,
+          }}
+        >
           {recommendedLabel}
         </Typography>
         <Stack direction="row" flexWrap="wrap" gap={0.6} useFlexGap>
@@ -117,9 +167,21 @@ function ModeCard({
 
       <Stack spacing={0.9} sx={{ mt: 1.75 }}>
         {bullets.map((line) => (
-          <Box key={line} sx={{ display: "flex", gap: 1, alignItems: "flex-start" }}>
-            <CheckRoundedIcon sx={{ fontSize: 16, color: labelColor, mt: 0.1, flexShrink: 0 }} />
-            <Typography sx={{ fontSize: 12, lineHeight: 1.5, color: "text.secondary", fontWeight: 500 }}>
+          <Box
+            key={line}
+            sx={{ display: "flex", gap: 1, alignItems: "flex-start" }}
+          >
+            <CheckRoundedIcon
+              sx={{ fontSize: 16, color: labelColor, mt: 0.1, flexShrink: 0 }}
+            />
+            <Typography
+              sx={{
+                fontSize: 12,
+                lineHeight: 1.5,
+                color: "text.secondary",
+                fontWeight: 500,
+              }}
+            >
               {line}
             </Typography>
           </Box>
@@ -135,16 +197,199 @@ function ModeCard({
             display: "flex",
             gap: 1.25,
             alignItems: "flex-start",
-            bgcolor: isDark ? "rgba(251, 191, 36, 0.08)" : "rgba(245, 158, 11, 0.08)",
-            border: isDark ? "1px solid rgba(251, 191, 36, 0.2)" : "1px solid rgba(245, 158, 11, 0.2)",
+            bgcolor: isDark
+              ? "rgba(251, 191, 36, 0.08)"
+              : "rgba(245, 158, 11, 0.08)",
+            border: isDark
+              ? "1px solid rgba(251, 191, 36, 0.2)"
+              : "1px solid rgba(245, 158, 11, 0.2)",
           }}
         >
-          <InfoOutlinedIcon sx={{ fontSize: 18, color: isDark ? "#fbbf24" : "#d97706", mt: 0.1, flexShrink: 0 }} />
-          <Typography sx={{ fontSize: 12, lineHeight: 1.55, color: isDark ? "#fde68a" : "#92400e", fontWeight: 600 }}>
+          <InfoOutlinedIcon
+            sx={{
+              fontSize: 18,
+              color: isDark ? "#fbbf24" : "#d97706",
+              mt: 0.1,
+              flexShrink: 0,
+            }}
+          />
+          <Typography
+            sx={{
+              fontSize: 12,
+              lineHeight: 1.55,
+              color: isDark ? "#fde68a" : "#92400e",
+              fontWeight: 600,
+            }}
+          >
             {note}
           </Typography>
         </Box>
       ) : null}
+    </Box>
+  );
+}
+
+type ComparisonCell = "included" | "excluded" | "fullSuite";
+
+type ComparisonCopy = {
+  intro: string;
+  columns: { feature: string; flex: string; fixed: string };
+  included: string;
+  fullSuite: string;
+  rows: readonly { feature: string; flex: ComparisonCell; fixed: ComparisonCell }[];
+};
+
+function ComparisonCellContent({
+  value,
+  labels,
+  isDark,
+}: {
+  value: ComparisonCell;
+  labels: { included: string; fullSuite: string };
+  isDark: boolean;
+}) {
+  const includedGreen = isDark ? "#34d399" : "#059669";
+  const excludedRed = isDark ? "#f87171" : "#dc2626";
+
+  if (value === "fullSuite") {
+    return (
+      <Typography sx={{ fontSize: 13, fontWeight: 600, color: "text.primary", lineHeight: 1.3 }}>
+        {labels.fullSuite}
+      </Typography>
+    );
+  }
+
+  if (value === "included") {
+    return (
+      <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.5, justifyContent: "center" }}>
+        <CheckRoundedIcon sx={{ fontSize: 18, color: includedGreen }} aria-hidden />
+        <Typography sx={{ fontSize: 13, fontWeight: 600, color: includedGreen, lineHeight: 1.3 }}>
+          {labels.included}
+        </Typography>
+      </Box>
+    );
+  }
+
+  return (
+    <CloseRoundedIcon
+      sx={{ fontSize: 20, color: excludedRed }}
+      aria-label="Not included"
+    />
+  );
+}
+
+function ModeComparisonTable({ copy, isDark }: { copy: ComparisonCopy; isDark: boolean }) {
+  const border = isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(15, 23, 42, 0.08)";
+  const cardBg = isDark ? "rgba(30, 32, 44, 0.75)" : "#ffffff";
+  const headerBg = isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(248, 250, 252, 0.9)";
+  const rowBorder = isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(15, 23, 42, 0.06)";
+  const labelColor = isDark ? "#F472B6" : "#E11D48";
+
+  return (
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      sx={{ mt: { xs: 4, md: 5 }, maxWidth: 720, mx: "auto" }}
+    >
+      <Typography
+        sx={{
+          mb: { xs: 2, md: 2.5 },
+          fontSize: { xs: 14, sm: 15 },
+          lineHeight: 1.6,
+          color: "text.secondary",
+          fontWeight: 500,
+          textAlign: "center",
+          maxWidth: 520,
+          mx: "auto",
+        }}
+      >
+        {copy.intro}
+      </Typography>
+
+      <Box
+        sx={{
+          borderRadius: "16px",
+          border,
+          bgcolor: cardBg,
+          overflow: "hidden",
+          boxShadow: isDark
+            ? "0 12px 36px rgba(0,0,0,0.28)"
+            : "0 12px 40px -12px rgba(15,23,42,0.1)",
+        }}
+      >
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1.4fr 1fr 1fr", sm: "1.5fr 1fr 1fr" },
+            gap: 0,
+            px: { xs: 1.5, sm: 2.5 },
+            py: { xs: 1.25, sm: 1.5 },
+            bgcolor: headerBg,
+            borderBottom: `1px solid ${rowBorder}`,
+          }}
+        >
+          <Typography sx={{ fontSize: 12, fontWeight: 700, color: "text.secondary", letterSpacing: "0.04em" }}>
+            {copy.columns.feature}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 12,
+              fontWeight: 800,
+              color: labelColor,
+              textAlign: "center",
+              letterSpacing: "0.03em",
+            }}
+          >
+            {copy.columns.flex}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 12,
+              fontWeight: 800,
+              color: labelColor,
+              textAlign: "center",
+              letterSpacing: "0.03em",
+            }}
+          >
+            {copy.columns.fixed}
+          </Typography>
+        </Box>
+
+        {copy.rows.map((row, index) => (
+          <Box
+            key={row.feature}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1.4fr 1fr 1fr", sm: "1.5fr 1fr 1fr" },
+              gap: 0,
+              px: { xs: 1.5, sm: 2.5 },
+              py: { xs: 1.25, sm: 1.35 },
+              alignItems: "center",
+              borderBottom: index < copy.rows.length - 1 ? `1px solid ${rowBorder}` : "none",
+            }}
+          >
+            <Typography sx={{ fontSize: { xs: 13, sm: 14 }, fontWeight: 600, color: "text.primary", lineHeight: 1.4, pr: 1 }}>
+              {row.feature}
+            </Typography>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <ComparisonCellContent
+                value={row.flex}
+                labels={{ included: copy.included, fullSuite: copy.fullSuite }}
+                isDark={isDark}
+              />
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <ComparisonCellContent
+                value={row.fixed}
+                labels={{ included: copy.included, fullSuite: copy.fullSuite }}
+                isDark={isDark}
+              />
+            </Box>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }
@@ -156,12 +401,19 @@ export function BranchModesSection() {
   const m = t.branchModes;
 
   const sectionBg = isDark ? "#080a12" : "#f8fafc";
-  const borderSubtle = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(15, 23, 42, 0.06)";
-  const supportBg = isDark ? "rgba(96, 165, 250, 0.08)" : "rgba(37, 99, 235, 0.06)";
-  const supportBorder = isDark ? "rgba(96, 165, 250, 0.22)" : "rgba(37, 99, 235, 0.15)";
+  const borderSubtle = isDark
+    ? "rgba(255, 255, 255, 0.08)"
+    : "rgba(15, 23, 42, 0.06)";
+  const supportBg = isDark
+    ? "rgba(96, 165, 250, 0.08)"
+    : "rgba(37, 99, 235, 0.06)";
+  const supportBorder = isDark
+    ? "rgba(96, 165, 250, 0.22)"
+    : "rgba(37, 99, 235, 0.15)";
 
   return (
     <Box
+      id="branch-modes"
       component="section"
       sx={{
         py: { xs: 7, md: 8 },
@@ -170,6 +422,7 @@ export function BranchModesSection() {
         bgcolor: sectionBg,
         borderTop: `1px solid ${borderSubtle}`,
         borderBottom: `1px solid ${borderSubtle}`,
+        scrollMarginTop: `${HEADER_OFFSET_PX + 16}px`,
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative" }}>
@@ -195,7 +448,12 @@ export function BranchModesSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, type: "spring", stiffness: 200, damping: 26 }}
+          transition={{
+            duration: 0.55,
+            type: "spring",
+            stiffness: 200,
+            damping: 26,
+          }}
           sx={{ mb: { xs: 2.5, md: 3 } }}
         >
           <ProductShot
@@ -237,7 +495,14 @@ export function BranchModesSection() {
             border: `1px solid ${supportBorder}`,
           }}
         >
-          <Typography sx={{ fontSize: { xs: 13, sm: 14 }, lineHeight: 1.55, color: "text.primary", fontWeight: 600 }}>
+          <Typography
+            sx={{
+              fontSize: { xs: 13, sm: 14 },
+              lineHeight: 1.55,
+              color: "text.primary",
+              fontWeight: 600,
+            }}
+          >
             {m.supportLine}
           </Typography>
         </Box>
@@ -259,9 +524,15 @@ export function BranchModesSection() {
             mx: "auto",
           }}
         >
-          <ModeCard {...m.fixed} icon={TableRestaurantOutlinedIcon} isDark={isDark} />
+          <ModeCard
+            {...m.fixed}
+            icon={TableRestaurantOutlinedIcon}
+            isDark={isDark}
+          />
           <ModeCard {...m.flex} icon={GroupsOutlinedIcon} isDark={isDark} />
         </Box>
+
+        <ModeComparisonTable copy={m.comparison} isDark={isDark} />
       </Container>
     </Box>
   );

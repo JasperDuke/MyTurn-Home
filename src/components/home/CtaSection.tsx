@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import TableRestaurantOutlinedIcon from "@mui/icons-material/TableRestaurantOutlined";
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import { BookDemoModal } from "@/components/home/BookDemoModal";
 import { SectionHeading } from "@/components/home/SectionHeading";
@@ -11,18 +13,20 @@ import {
   SECTION_PX,
   SECTION_PY,
   primaryCtaSx,
-  secondaryCtaSx,
 } from "@/components/home/styles";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { scrollToSection } from "@/lib/scroll";
 import {
   BILLING_CYCLES,
+  BRANCH_MODES,
   formatUsd,
-  getExpansionBranchQuote,
-  getMainBranchQuote,
-  getPlanCardSavings,
-  SETUP_FEE_USD,
+  getAddonBranchQuote,
+  getCoreBranchQuote,
+  getModeCardSavings,
+  SETUP_FEE_ADDON_USD,
+  SETUP_FEE_CORE_USD,
   type BillingCycle,
-  type PlanKey,
+  type BranchMode,
 } from "@/lib/pricing";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
@@ -36,10 +40,28 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 26 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 26 },
+  },
 };
 
-const PLAN_KEYS: PlanKey[] = ["foundation", "pro"];
+const MODE_ICONS = {
+  flex: GroupsOutlinedIcon,
+  fixed: TableRestaurantOutlinedIcon,
+} as const;
+
+type PlanCopy = {
+  name: string;
+  tagline: string;
+  description: string;
+  features: readonly PlanFeature[];
+  ctaLabel: string;
+  trialSubtext: string;
+  ctaVariant: "primary";
+};
+
 const VISIBLE_FEATURE_COUNT = 2;
 
 type PlanFeature = { text: string };
@@ -103,7 +125,14 @@ function FeatureList({ items, isDark }: { items: string[]; isDark: boolean }) {
       {items.map((text) => (
         <Box component="li" key={text} sx={featureItemSx}>
           <FeatureTick isDark={isDark} />
-          <Typography sx={{ fontSize: 14, lineHeight: 1.45, color: "text.secondary", fontWeight: 500 }}>
+          <Typography
+            sx={{
+              fontSize: 14,
+              lineHeight: 1.45,
+              color: "text.secondary",
+              fontWeight: 500,
+            }}
+          >
             {text}
           </Typography>
         </Box>
@@ -123,7 +152,11 @@ function PlanFeaturesAccordion({
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isDark: boolean;
-  labels: { viewAllFeatures: string; hideFeatures: string; moreFeatures: string };
+  labels: {
+    viewAllFeatures: string;
+    hideFeatures: string;
+    moreFeatures: string;
+  };
 }) {
   const linkColor = isDark ? "#94a3b8" : "#6b7280";
   const linkHover = isDark ? "#f1f5f9" : "#111827";
@@ -140,7 +173,9 @@ function PlanFeaturesAccordion({
 
   return (
     <Box sx={{ mt: 1.5 }}>
-      {visibleItems.length > 0 ? <FeatureList items={visibleItems} isDark={isDark} /> : null}
+      {visibleItems.length > 0 ? (
+        <FeatureList items={visibleItems} isDark={isDark} />
+      ) : null}
 
       {hasHidden ? (
         <>
@@ -202,13 +237,14 @@ function cycleBadge(
 }
 
 type PricingCopy = {
-  mainBranchLabel: string;
-  expansionBranchLabel: string;
+  coreBranchLabel: string;
+  addonBranchLabel: string;
   perMonth: string;
   billedYearly: string;
   billedSemiAnnual: string;
   savePerYear: string;
   savePerPeriod: string;
+  savePercentBadge: string;
   setupFeeMonthly: string;
   setupFeeWaived: string;
 };
@@ -236,23 +272,33 @@ function formatSaveLine(
 
 function SetupFeeLine({
   billing,
+  fee,
   p,
   savingsGreen,
   mutedColor,
 }: {
   billing: BillingCycle;
+  fee: number;
   p: Pick<PricingCopy, "setupFeeMonthly" | "setupFeeWaived">;
   savingsGreen: string;
   mutedColor: string;
 }) {
   if (billing === "annual") {
     return (
-      <Typography sx={{ mt: 1, fontSize: 12, fontWeight: 500, color: "text.secondary", lineHeight: 1.4 }}>
+      <Typography
+        sx={{
+          mt: 1,
+          fontSize: 12,
+          fontWeight: 500,
+          color: "text.secondary",
+          lineHeight: 1.4,
+        }}
+      >
         <Box
           component="span"
           sx={{ textDecoration: "line-through", color: mutedColor, mr: 0.5 }}
         >
-          +{formatUsd(SETUP_FEE_USD)}
+          +{formatUsd(fee)}
         </Box>
         <Box component="span" sx={{ color: savingsGreen, fontWeight: 600 }}>
           {p.setupFeeWaived}
@@ -262,8 +308,16 @@ function SetupFeeLine({
   }
 
   return (
-    <Typography sx={{ mt: 1, fontSize: 12, fontWeight: 500, color: "text.secondary", lineHeight: 1.4 }}>
-      {p.setupFeeMonthly.replace("{amount}", formatUsd(SETUP_FEE_USD))}
+    <Typography
+      sx={{
+        mt: 1,
+        fontSize: 12,
+        fontWeight: 500,
+        color: "text.secondary",
+        lineHeight: 1.4,
+      }}
+    >
+      {p.setupFeeMonthly.replace("{amount}", formatUsd(fee))}
     </Typography>
   );
 }
@@ -314,7 +368,9 @@ function BranchPricingBlock({
       <Box sx={{ display: "flex", alignItems: "baseline", gap: 0.5 }}>
         <Typography
           sx={{
-            fontSize: compact ? { xs: "1.45rem", md: "1.55rem" } : { xs: "1.85rem", md: "2.1rem" },
+            fontSize: compact
+              ? { xs: "1.45rem", md: "1.55rem" }
+              : { xs: "1.85rem", md: "2.1rem" },
             fontWeight: 700,
             color: "text.primary",
             lineHeight: 1.1,
@@ -376,8 +432,8 @@ function BranchPricingBlock({
 }
 
 function BranchPricingGrid({
-  main,
-  expansion,
+  core,
+  addon,
   billing,
   p,
   isDark,
@@ -385,58 +441,344 @@ function BranchPricingGrid({
   cardSavings,
   dividerColor,
 }: {
-  main: BranchPriceQuote;
-  expansion: BranchPriceQuote;
+  core: BranchPriceQuote;
+  addon: BranchPriceQuote;
   billing: BillingCycle;
   p: PricingCopy;
   isDark: boolean;
   savingsGreen: string;
-  cardSavings: ReturnType<typeof getPlanCardSavings>;
+  cardSavings: ReturnType<typeof getModeCardSavings>;
   dividerColor: string;
 }) {
   const mutedColor = isDark ? "#94a3b8" : "#64748b";
 
   return (
-    <Box
-      sx={{
-        mt: 2,
-        display: "grid",
-        gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-        gap: { xs: 0, md: 3 },
-        alignItems: "start",
-      }}
-    >
+    <Box sx={{ position: "relative", mt: 2 }}>
+      {cardSavings ? (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            px: 1,
+            py: 0.35,
+            borderRadius: "8px",
+            fontSize: 10,
+            fontWeight: 800,
+            letterSpacing: "0.04em",
+            color: isDark ? "#fda4af" : "#be123c",
+            bgcolor: isDark ? "rgba(244,114,182,0.15)" : "rgba(225,29,72,0.08)",
+          }}
+        >
+          {p.savePercentBadge.replace("{percent}", String(cardSavings.percent))}
+        </Box>
+      ) : null}
+
       <Box
         sx={{
-          borderBottom: { xs: `1px solid ${dividerColor}`, md: "none" },
-          pb: { xs: 3, md: 0 },
-          pr: { md: 3 },
-          borderRight: { md: `1px solid ${dividerColor}` },
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+          gap: { xs: 0, sm: 2.5 },
+          alignItems: "start",
+          pt: cardSavings ? 0.5 : 0,
         }}
       >
-        <BranchPricingBlock
-          label={p.mainBranchLabel}
-          quote={main}
-          billing={billing}
-          p={p}
-          savingsGreen={savingsGreen}
-          isDark={isDark}
-          saveAmount={cardSavings?.total ?? null}
-        />
-        <SetupFeeLine billing={billing} p={p} savingsGreen={savingsGreen} mutedColor={mutedColor} />
+        <Box
+          sx={{
+            borderBottom: { xs: `1px solid ${dividerColor}`, sm: "none" },
+            pb: { xs: 2.5, sm: 0 },
+            pr: { sm: 2.5 },
+            borderRight: { sm: `1px solid ${dividerColor}` },
+          }}
+        >
+          <BranchPricingBlock
+            label={p.coreBranchLabel}
+            quote={core}
+            billing={billing}
+            p={p}
+            savingsGreen={savingsGreen}
+            isDark={isDark}
+            saveAmount={cardSavings?.total ?? null}
+          />
+          <SetupFeeLine
+            billing={billing}
+            fee={SETUP_FEE_CORE_USD}
+            p={p}
+            savingsGreen={savingsGreen}
+            mutedColor={mutedColor}
+          />
+        </Box>
+
+        <Box sx={{ pt: { xs: 2.5, sm: 0 }, pl: { sm: 0.5 } }}>
+          <BranchPricingBlock
+            label={p.addonBranchLabel}
+            quote={addon}
+            billing={billing}
+            p={p}
+            savingsGreen={savingsGreen}
+            isDark={isDark}
+            compact
+            saveAmount={addon.savingsAmount}
+          />
+          <SetupFeeLine
+            billing={billing}
+            fee={SETUP_FEE_ADDON_USD}
+            p={p}
+            savingsGreen={savingsGreen}
+            mutedColor={mutedColor}
+          />
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+function SetupFeeCallout({
+  isDark,
+  text,
+  note,
+}: {
+  isDark: boolean;
+  text: string;
+  note: string;
+}) {
+  const border = isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(15, 23, 42, 0.08)";
+  const bg = isDark ? "rgba(30, 32, 44, 0.55)" : "rgba(248, 250, 252, 0.9)";
+
+  return (
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      sx={{
+        mb: { xs: 2.5, md: 3 },
+        maxWidth: 640,
+        mx: "auto",
+        px: { xs: 2, sm: 2.5 },
+        py: { xs: 1.25, sm: 1.5 },
+        borderRadius: "12px",
+        border,
+        bgcolor: bg,
+        textAlign: "center",
+      }}
+    >
+      <Typography sx={{ fontSize: { xs: 13, sm: 14 }, fontWeight: 600, color: "text.primary", lineHeight: 1.45 }}>
+        {text}
+      </Typography>
+      <Typography sx={{ mt: 0.5, fontSize: 12, fontWeight: 500, color: "text.secondary", lineHeight: 1.4 }}>
+        {note}
+      </Typography>
+    </Box>
+  );
+}
+
+function PricingModesBridge({
+  bridge,
+  linkLabel,
+  isDark,
+}: {
+  bridge: string;
+  linkLabel: string;
+  isDark: boolean;
+}) {
+  const linkColor = isDark ? "#F472B6" : "#E11D48";
+
+  return (
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      sx={{ mb: { xs: 2.5, md: 3 }, textAlign: "center" }}
+    >
+      <Typography sx={{ fontSize: { xs: 13, sm: 14 }, fontWeight: 500, color: "text.secondary", lineHeight: 1.5 }}>
+        {bridge}{" "}
+        <Box
+          component="a"
+          href="#branch-modes"
+          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+            scrollToSection("branch-modes");
+          }}
+          sx={{
+            color: linkColor,
+            fontWeight: 600,
+            textDecoration: "none",
+            borderBottom: `1px solid ${isDark ? "rgba(244,114,182,0.35)" : "rgba(225,29,72,0.25)"}`,
+            transition: "opacity 0.2s ease",
+            "&:hover": { opacity: 0.85 },
+          }}
+        >
+          {linkLabel}
+        </Box>
+      </Typography>
+    </Box>
+  );
+}
+
+function ModePricingCard({
+  mode,
+  plan,
+  billing,
+  p,
+  isDark,
+  border,
+  cardBg,
+  labelColor,
+  savingsGreen,
+  branchDividerColor,
+  featuresExpanded,
+  onFeaturesToggle,
+  onBookDemo,
+  featureLabels,
+}: {
+  mode: BranchMode;
+  plan: PlanCopy;
+  billing: BillingCycle;
+  p: PricingCopy & {
+    viewAllFeatures: string;
+    hideFeatures: string;
+    moreFeatures: string;
+  };
+  isDark: boolean;
+  border: string;
+  cardBg: string;
+  labelColor: string;
+  savingsGreen: string;
+  branchDividerColor: string;
+  featuresExpanded: boolean;
+  onFeaturesToggle: (open: boolean) => void;
+  onBookDemo: () => void;
+  featureLabels: {
+    viewAllFeatures: string;
+    hideFeatures: string;
+    moreFeatures: string;
+  };
+}) {
+  const Icon = MODE_ICONS[mode];
+  const cardSavings = getModeCardSavings(mode, billing);
+  const features = plan.features as PlanFeature[];
+
+  return (
+    <Box
+      component={motion.article}
+      variants={itemVariants}
+      sx={{
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        p: { xs: 3, md: 3.5 },
+        borderRadius: "16px",
+        border,
+        bgcolor: cardBg,
+        textAlign: "left",
+        boxShadow: isDark
+          ? "0 12px 36px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.05)"
+          : "0 12px 40px -12px rgba(15,23,42,0.1)",
+      }}
+    >
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1.5 }}>
+        <Box
+          sx={{
+            width: 44,
+            height: 44,
+            borderRadius: "12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            bgcolor: isDark
+              ? "rgba(244, 114, 182, 0.12)"
+              : "rgba(225, 29, 72, 0.08)",
+            color: labelColor,
+          }}
+        >
+          <Icon sx={{ fontSize: 24 }} />
+        </Box>
+        <Typography
+          sx={{
+            fontWeight: 700,
+            fontSize: { xs: 18, md: 20 },
+            color: "text.primary",
+            lineHeight: 1.25,
+          }}
+        >
+          {plan.name}
+        </Typography>
       </Box>
 
-      <Box sx={{ pt: { xs: 3, md: 0 }, pl: { md: 1 } }}>
-        <BranchPricingBlock
-          label={p.expansionBranchLabel}
-          quote={expansion}
-          billing={billing}
-          p={p}
-          savingsGreen={savingsGreen}
+      <Typography
+        sx={{
+          fontWeight: 700,
+          fontSize: 14,
+          color: "text.primary",
+          lineHeight: 1.4,
+        }}
+      >
+        {plan.tagline}
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: 1,
+          fontSize: 13,
+          lineHeight: 1.55,
+          color: "text.secondary",
+          fontWeight: 500,
+        }}
+      >
+        {plan.description}
+      </Typography>
+
+      <BranchPricingGrid
+        core={getCoreBranchQuote(mode, billing)}
+        addon={getAddonBranchQuote(mode, billing)}
+        billing={billing}
+        p={p}
+        isDark={isDark}
+        savingsGreen={savingsGreen}
+        cardSavings={cardSavings}
+        dividerColor={branchDividerColor}
+      />
+
+      <Box
+        sx={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}
+      >
+        <PlanFeaturesAccordion
+          features={features}
+          open={featuresExpanded}
+          onOpenChange={onFeaturesToggle}
           isDark={isDark}
-          compact
-          saveAmount={expansion.savingsAmount}
+          labels={featureLabels}
         />
+
+        <Box sx={{ mt: "auto", pt: 2, flexShrink: 0 }}>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={onBookDemo}
+            sx={primaryCtaSx(isDark)}
+          >
+            {plan.ctaLabel}
+          </Button>
+
+          {plan.trialSubtext ? (
+            <Typography
+              sx={{
+                mt: 1.25,
+                fontSize: 12,
+                fontWeight: 500,
+                color: "text.secondary",
+                textAlign: "center",
+                lineHeight: 1.45,
+              }}
+            >
+              {plan.trialSubtext}
+            </Typography>
+          ) : null}
+        </Box>
       </Box>
     </Box>
   );
@@ -445,21 +787,32 @@ function BranchPricingGrid({
 export function CtaSection() {
   const isDark = useTheme().palette.mode === "dark";
   const [billing, setBilling] = useState<BillingCycle>("monthly");
-  const [featuresExpanded, setFeaturesExpanded] = useState(false);
+  const [featuresExpanded, setFeaturesExpanded] = useState<
+    Record<BranchMode, boolean>
+  >({
+    flex: false,
+    fixed: false,
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useLanguage();
   const p = t.cta;
 
   const labelColor = isDark ? "#F472B6" : "#E11D48";
-  const border = isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(15, 23, 42, 0.08)";
+  const border = isDark
+    ? "1px solid rgba(255, 255, 255, 0.1)"
+    : "1px solid rgba(15, 23, 42, 0.08)";
   const cardBg = isDark ? "rgba(30, 32, 44, 0.82)" : "#ffffff";
   const toggleBg = isDark ? "rgba(255,255,255,0.08)" : "#ffffff";
   const toggleActiveBg = isDark ? "rgba(30,32,44,0.95)" : "#fdf2f8";
-  const toggleTrackBorder = isDark ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(15,23,42,0.1)";
+  const toggleTrackBorder = isDark
+    ? "1px solid rgba(255,255,255,0.12)"
+    : "1px solid rgba(15,23,42,0.1)";
   const toggleShadow = isDark
     ? "0 4px 20px rgba(0,0,0,0.2)"
     : "0 4px 20px rgba(225,29,72,0.08), 0 1px 3px rgba(15,23,42,0.06)";
-  const selectedToggleShadow = isDark ? "none" : "0 1px 4px rgba(15,23,42,0.08)";
+  const selectedToggleShadow = isDark
+    ? "none"
+    : "0 1px 4px rgba(15,23,42,0.08)";
   const savingsGreen = isDark ? "#34d399" : "#059669";
   const branchDividerColor = isDark ? "rgba(255,255,255,0.1)" : "#e5e7eb";
   return (
@@ -503,7 +856,10 @@ export function CtaSection() {
             aria-label={p.billingToggleLabel}
             sx={{
               display: { xs: "grid", md: "inline-flex" },
-              gridTemplateColumns: { xs: "repeat(3, minmax(0, 1fr))", md: "none" },
+              gridTemplateColumns: {
+                xs: "repeat(3, minmax(0, 1fr))",
+                md: "none",
+              },
               width: { xs: "100%", md: "auto" },
               maxWidth: { xs: "100%", md: "none" },
               gap: 0.5,
@@ -562,10 +918,16 @@ export function CtaSection() {
                     },
                   }}
                 >
-                  <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                  <Box
+                    component="span"
+                    sx={{ display: { xs: "none", sm: "inline" } }}
+                  >
                     {cycleLabel}
                   </Box>
-                  <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                  <Box
+                    component="span"
+                    sx={{ display: { xs: "inline", sm: "none" } }}
+                  >
                     {cycleLabelShort}
                   </Box>
                   {badge ? (
@@ -579,7 +941,9 @@ export function CtaSection() {
                         fontWeight: 800,
                         letterSpacing: "0.02em",
                         color: isDark ? "#fda4af" : "#be123c",
-                        bgcolor: isDark ? "rgba(244,114,182,0.15)" : "rgba(225,29,72,0.08)",
+                        bgcolor: isDark
+                          ? "rgba(244,114,182,0.15)"
+                          : "rgba(225,29,72,0.08)",
                       }}
                     >
                       {badge}
@@ -590,6 +954,20 @@ export function CtaSection() {
             })}
           </Box>
         </Box>
+
+        <PricingModesBridge
+          bridge={p.pricingModesBridge}
+          linkLabel={p.pricingModesBridgeLink}
+          isDark={isDark}
+        />
+
+        <SetupFeeCallout
+          isDark={isDark}
+          text={p.setupFeeCallout
+            .replace("{core}", formatUsd(SETUP_FEE_CORE_USD))
+            .replace("{addon}", formatUsd(SETUP_FEE_ADDON_USD))}
+          note={p.setupFeeCalloutNote}
+        />
 
         <Box
           component={motion.div}
@@ -606,168 +984,31 @@ export function CtaSection() {
             width: "100%",
           }}
         >
-          {PLAN_KEYS.map((planKey) => {
-            const plan = p.plans[planKey];
-            const main = getMainBranchQuote(planKey, billing);
-            const expansion = getExpansionBranchQuote(planKey, billing);
-            const cardSavings = getPlanCardSavings(planKey, billing);
-            const isHighlighted = plan.recommended;
-            const features = plan.features as PlanFeature[];
-
-            return (
-              <Box
-                component={motion.article}
-                variants={itemVariants}
-                key={planKey}
-                sx={{
-                  position: "relative",
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                  p: { xs: 3, md: 3.5 },
-                  borderRadius: "16px",
-                  border: isHighlighted
-                    ? `1.5px solid ${isDark ? "rgba(244,114,182,0.45)" : "rgba(225,29,72,0.3)"}`
-                    : border,
-                  bgcolor: cardBg,
-                  textAlign: "left",
-                  opacity: plan.comingSoon ? 0.92 : 1,
-                }}
-              >
-                {cardSavings ? (
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: { xs: 14, md: 16 },
-                      right: { xs: 14, md: 16 },
-                      px: 1,
-                      py: 0.35,
-                      borderRadius: "8px",
-                      fontSize: 11,
-                      fontWeight: 800,
-                      letterSpacing: "0.04em",
-                      color: isDark ? "#fda4af" : "#be123c",
-                      bgcolor: isDark ? "rgba(244,114,182,0.15)" : "rgba(225,29,72,0.08)",
-                    }}
-                  >
-                    {p.savePercentBadge.replace("{percent}", String(cardSavings.percent))}
-                  </Box>
-                ) : null}
-
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap", mb: 1.5, pr: cardSavings ? 7 : 0 }}>
-                  <Typography
-                    sx={{
-                      fontSize: 11,
-                      fontWeight: 800,
-                      letterSpacing: "0.07em",
-                      textTransform: "uppercase",
-                      color: labelColor,
-                    }}
-                  >
-                    {plan.badge}
-                  </Typography>
-                  {plan.recommended ? (
-                    <Typography
-                      sx={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.05em",
-                        textTransform: "uppercase",
-                        color: isDark ? "#34d399" : "#059669",
-                      }}
-                    >
-                      {p.recommendedLabel}
-                    </Typography>
-                  ) : null}
-                  {plan.comingSoon ? (
-                    <Typography
-                      sx={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.05em",
-                        textTransform: "uppercase",
-                        color: isDark ? "#94a3b8" : "#64748b",
-                      }}
-                    >
-                      {p.comingSoonLabel}
-                    </Typography>
-                  ) : null}
-                </Box>
-
-                <Typography
-                  sx={{
-                    fontWeight: 700,
-                    fontSize: { xs: 17, md: 18 },
-                    color: "text.primary",
-                    lineHeight: 1.25,
-                    mt: 0.25,
-                  }}
-                >
-                  {plan.name}
-                </Typography>
-
-                <BranchPricingGrid
-                  main={main}
-                  expansion={expansion}
-                  billing={billing}
-                  p={p}
-                  isDark={isDark}
-                  savingsGreen={savingsGreen}
-                  cardSavings={cardSavings}
-                  dividerColor={branchDividerColor}
-                />
-
-                <Box sx={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
-                  <Typography sx={{ mt: 3, fontSize: 13, lineHeight: 1.55, color: "text.secondary", fontWeight: 500 }}>
-                    {plan.description}
-                  </Typography>
-
-                  <PlanFeaturesAccordion
-                    features={features}
-                    open={featuresExpanded}
-                    onOpenChange={setFeaturesExpanded}
-                    isDark={isDark}
-                    labels={{
-                      viewAllFeatures: p.viewAllFeatures,
-                      hideFeatures: p.hideFeatures,
-                      moreFeatures: p.moreFeatures,
-                    }}
-                  />
-
-                  <Box sx={{ mt: "auto", pt: 2, flexShrink: 0 }}>
-                    <Button
-                      fullWidth
-                      variant={plan.ctaVariant === "primary" ? "contained" : "outlined"}
-                      disabled={plan.comingSoon}
-                      onClick={() => {
-                        if (!plan.comingSoon) setIsModalOpen(true);
-                      }}
-                      sx={{
-                        ...(plan.ctaVariant === "primary" ? primaryCtaSx(isDark) : secondaryCtaSx(isDark)),
-                      }}
-                    >
-                      {plan.ctaLabel}
-                    </Button>
-
-                    {plan.trialSubtext ? (
-                      <Typography
-                        sx={{
-                          mt: 1.25,
-                          fontSize: 12,
-                          fontWeight: 500,
-                          color: "text.secondary",
-                          textAlign: "center",
-                          lineHeight: 1.45,
-                        }}
-                      >
-                        {plan.trialSubtext}
-                      </Typography>
-                    ) : null}
-                  </Box>
-                </Box>
-              </Box>
-            );
-          })}
+          {BRANCH_MODES.map((mode) => (
+            <ModePricingCard
+              key={mode}
+              mode={mode}
+              plan={p.plans[mode]}
+              billing={billing}
+              p={p}
+              isDark={isDark}
+              border={border}
+              cardBg={cardBg}
+              labelColor={labelColor}
+              savingsGreen={savingsGreen}
+              branchDividerColor={branchDividerColor}
+              featuresExpanded={featuresExpanded[mode]}
+              onFeaturesToggle={(open) =>
+                setFeaturesExpanded((prev) => ({ ...prev, [mode]: open }))
+              }
+              onBookDemo={() => setIsModalOpen(true)}
+              featureLabels={{
+                viewAllFeatures: p.viewAllFeatures,
+                hideFeatures: p.hideFeatures,
+                moreFeatures: p.moreFeatures,
+              }}
+            />
+          ))}
         </Box>
 
         <Box
@@ -783,7 +1024,9 @@ export function CtaSection() {
             p: { xs: 2.5, md: 3 },
             borderRadius: "14px",
             textAlign: "center",
-            border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(15,23,42,0.08)",
+            border: isDark
+              ? "1px solid rgba(255,255,255,0.1)"
+              : "1px solid rgba(15,23,42,0.08)",
             bgcolor: isDark ? "rgba(30, 32, 44, 0.82)" : "#ffffff",
             boxShadow: isDark
               ? "0 8px 32px rgba(0,0,0,0.25)"

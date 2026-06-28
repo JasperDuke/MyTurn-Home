@@ -1,8 +1,12 @@
 export type BillingCycle = "monthly" | "semiAnnual" | "annual";
 
-export type PlanKey = "foundation" | "pro";
+export type BranchMode = "flex" | "fixed";
 
-export const SETUP_FEE_USD = 49;
+export const SETUP_FEE_CORE_USD = 49.99;
+export const SETUP_FEE_ADDON_USD = 39.99;
+
+/** @deprecated Use SETUP_FEE_CORE_USD */
+export const SETUP_FEE_USD = SETUP_FEE_CORE_USD;
 
 type BranchRates = {
   monthly: number;
@@ -12,53 +16,46 @@ type BranchRates = {
   annualTotal: number;
 };
 
-export const PLAN_PRICING: Record<PlanKey, { main: BranchRates; expansion: BranchRates }> = {
-  foundation: {
-    main: {
-      monthly: 49,
-      semiAnnualPerMonth: 44,
-      semiAnnualTotal: 264,
-      annualPerMonth: 39,
-      annualTotal: 468,
-    },
-    expansion: {
-      monthly: 29,
-      semiAnnualPerMonth: 26,
-      semiAnnualTotal: 156,
-      annualPerMonth: 24,
-      annualTotal: 288,
-    },
+function deriveBranchRates(monthly: number): BranchRates {
+  const semiAnnualPerMonth = Math.round(monthly * 0.9 * 100) / 100;
+  const annualPerMonth = Math.round(monthly * 0.8 * 100) / 100;
+
+  return {
+    monthly,
+    semiAnnualPerMonth,
+    semiAnnualTotal: Math.round(semiAnnualPerMonth * 6 * 100) / 100,
+    annualPerMonth,
+    annualTotal: Math.round(annualPerMonth * 12 * 100) / 100,
+  };
+}
+
+export const MODE_PRICING: Record<BranchMode, { core: BranchRates; addon: BranchRates }> = {
+  flex: {
+    core: deriveBranchRates(39.99),
+    addon: deriveBranchRates(29.99),
   },
-  pro: {
-    main: {
-      monthly: 89,
-      semiAnnualPerMonth: 80,
-      semiAnnualTotal: 480,
-      annualPerMonth: 75,
-      annualTotal: 900,
-    },
-    expansion: {
-      monthly: 59,
-      semiAnnualPerMonth: 53,
-      semiAnnualTotal: 318,
-      annualPerMonth: 49,
-      annualTotal: 588,
-    },
+  fixed: {
+    core: deriveBranchRates(69.99),
+    addon: deriveBranchRates(59.99),
   },
 };
+
+export const BRANCH_MODES: BranchMode[] = ["flex", "fixed"];
 
 export const BILLING_CYCLES: BillingCycle[] = ["monthly", "semiAnnual", "annual"];
 
 export function formatUsd(amount: number): string {
-  return `$${amount}`;
+  const formatted = amount.toFixed(2);
+  return formatted.endsWith(".00") ? `$${formatted.slice(0, -3)}` : `$${formatted}`;
 }
 
 export function isSetupFeeWaived(cycle: BillingCycle): boolean {
   return cycle === "annual";
 }
 
-export function setupFeeAmount(cycle: BillingCycle): number {
-  return isSetupFeeWaived(cycle) ? 0 : SETUP_FEE_USD;
+export function setupFeeAmount(cycle: BillingCycle, branch: "core" | "addon" = "core"): number {
+  if (isSetupFeeWaived(cycle)) return 0;
+  return branch === "core" ? SETUP_FEE_CORE_USD : SETUP_FEE_ADDON_USD;
 }
 
 function billingPeriodMonths(cycle: BillingCycle): number {
@@ -70,14 +67,13 @@ function billingPeriodMonths(cycle: BillingCycle): number {
 function subscriptionSavings(monthlyList: number, perMonth: number, totalUpfront: number, cycle: BillingCycle) {
   const months = billingPeriodMonths(cycle);
   const listTotal = monthlyList * months;
-  const saved = listTotal - totalUpfront;
+  const saved = Math.round((listTotal - totalUpfront) * 100) / 100;
   const percent = listTotal > 0 ? Math.round((saved / listTotal) * 100) : 0;
-  const savedPerMonth = monthlyList - perMonth;
+  const savedPerMonth = Math.round((monthlyList - perMonth) * 100) / 100;
   return { saved, percent, months, savedPerMonth };
 }
 
-export function getMainBranchQuote(planKey: PlanKey, cycle: BillingCycle) {
-  const rates = PLAN_PRICING[planKey].main;
+function getBranchQuote(rates: BranchRates, cycle: BillingCycle, setupSavingsAmount: number | null = null) {
   switch (cycle) {
     case "monthly":
       return {
@@ -87,7 +83,7 @@ export function getMainBranchQuote(planKey: PlanKey, cycle: BillingCycle) {
         savingsPercent: null as number | null,
         savingsAmount: null as number | null,
         savingsPerMonth: null as number | null,
-        setupSavingsAmount: null as number | null,
+        setupSavingsAmount,
         billingMonths: null as number | null,
       };
     case "semiAnnual": {
@@ -99,7 +95,7 @@ export function getMainBranchQuote(planKey: PlanKey, cycle: BillingCycle) {
         savingsPercent: s.percent,
         savingsAmount: s.saved,
         savingsPerMonth: s.savedPerMonth,
-        setupSavingsAmount: null,
+        setupSavingsAmount,
         billingMonths: s.months,
       };
     }
@@ -112,73 +108,38 @@ export function getMainBranchQuote(planKey: PlanKey, cycle: BillingCycle) {
         savingsPercent: s.percent,
         savingsAmount: s.saved,
         savingsPerMonth: s.savedPerMonth,
-        setupSavingsAmount: SETUP_FEE_USD,
+        setupSavingsAmount,
         billingMonths: s.months,
       };
     }
   }
 }
 
-export function getExpansionBranchQuote(planKey: PlanKey, cycle: BillingCycle) {
-  const rates = PLAN_PRICING[planKey].expansion;
-  switch (cycle) {
-    case "monthly":
-      return {
-        perMonth: rates.monthly,
-        totalUpfront: rates.monthly,
-        compareMonthly: null as number | null,
-        savingsPercent: null as number | null,
-        savingsAmount: null as number | null,
-        savingsPerMonth: null as number | null,
-        billingMonths: null as number | null,
-      };
-    case "semiAnnual": {
-      const s = subscriptionSavings(rates.monthly, rates.semiAnnualPerMonth, rates.semiAnnualTotal, cycle);
-      return {
-        perMonth: rates.semiAnnualPerMonth,
-        totalUpfront: rates.semiAnnualTotal,
-        compareMonthly: rates.monthly,
-        savingsPercent: s.percent,
-        savingsAmount: s.saved,
-        savingsPerMonth: s.savedPerMonth,
-        billingMonths: s.months,
-      };
-    }
-    case "annual": {
-      const s = subscriptionSavings(rates.monthly, rates.annualPerMonth, rates.annualTotal, cycle);
-      return {
-        perMonth: rates.annualPerMonth,
-        totalUpfront: rates.annualTotal,
-        compareMonthly: rates.monthly,
-        savingsPercent: s.percent,
-        savingsAmount: s.saved,
-        savingsPerMonth: s.savedPerMonth,
-        billingMonths: s.months,
-      };
-    }
-  }
+export function getCoreBranchQuote(mode: BranchMode, cycle: BillingCycle) {
+  const setupSavingsAmount = cycle === "annual" ? SETUP_FEE_CORE_USD : null;
+  return getBranchQuote(MODE_PRICING[mode].core, cycle, setupSavingsAmount);
 }
 
-export function getPlanCardSavings(planKey: PlanKey, cycle: BillingCycle) {
-  const main = getMainBranchQuote(planKey, cycle);
-  if (main.savingsAmount == null || main.savingsPercent == null) {
+export function getAddonBranchQuote(mode: BranchMode, cycle: BillingCycle) {
+  const setupSavingsAmount = cycle === "annual" ? SETUP_FEE_ADDON_USD : null;
+  return getBranchQuote(MODE_PRICING[mode].addon, cycle, setupSavingsAmount);
+}
+
+export function getModeCardSavings(mode: BranchMode, cycle: BillingCycle) {
+  const core = getCoreBranchQuote(mode, cycle);
+  if (core.savingsAmount == null || core.savingsPercent == null) {
     return null;
   }
-  const setup = main.setupSavingsAmount ?? 0;
+  const setup = core.setupSavingsAmount ?? 0;
   return {
-    percent: main.savingsPercent,
-    subscription: main.savingsAmount,
+    percent: core.savingsPercent,
+    subscription: core.savingsAmount,
     setup,
-    total: main.savingsAmount + setup,
+    total: Math.round((core.savingsAmount + setup) * 100) / 100,
   };
 }
 
-export function formatExpansionPrice(planKey: PlanKey, cycle: BillingCycle): string {
-  const q = getExpansionBranchQuote(planKey, cycle);
-  return `+${formatUsd(q.perMonth)}/mo`;
-}
-
-export type BranchQuote = ReturnType<typeof getMainBranchQuote>;
+export type BranchQuote = ReturnType<typeof getCoreBranchQuote>;
 
 export function getBranchSavingsAmount(quote: BranchQuote): number | null {
   return quote.savingsAmount;

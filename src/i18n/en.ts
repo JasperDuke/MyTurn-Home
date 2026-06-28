@@ -19,8 +19,8 @@ export const en = {
       "Match the right party to the right table, cut idle gaps, and run peak service with calm, predictable queue flow.",
     startTrial: "View pricing",
     bookDemo: "Book a demo",
-    ctaNote: "2-month free trial on your first branch · No credit card",
-    trialBadge: "2-Month Free Trial",
+    ctaNote: "1-month free trial on your first branch · No credit card",
+    trialBadge: "1-Month Free Trial",
   },
   problemSolution: {
     sectionLabel: "The problem",
@@ -71,52 +71,59 @@ export const en = {
     sectionLabel: "Core Features",
     title1: "Built for",
     titleHighlight: "peak-hour ops",
-    subtitle: "Everything your host stand needs to seat faster, waste fewer tables, and keep guests informed.",
+    subtitle:
+      "Everything your host stand needs to seat faster, waste fewer tables, and keep guests informed.",
     cards: [
       {
         title: "Deterministic Queue Logic",
-        description: "Enforce a structured customer journey (Waiting → Called → Seated → Finished) with automated no-show detection and status syncing.",
+        description:
+          "Enforce a structured customer journey (Waiting → Called → Seated → Finished) with automated no-show detection and status syncing.",
         footerLabel: "No-Show Rate",
         footerValue: "-45%",
       },
       {
         title: "Smart Recommendations",
-        description: "Instantly suggest the ideal party size the moment a table clears to maximize seat utilization and occupancy.",
+        description:
+          "Instantly suggest the ideal party size the moment a table clears to maximize seat utilization and occupancy.",
         footerLabel: "Utilization",
         footerValue: "98%",
       },
       {
         title: "Idle Gap Analytics",
-        description: "Monitor the critical minutes between a table clearing and the next seating to reclaim lost capacity and increase daily turns.",
+        description:
+          "Monitor the critical minutes between a table clearing and the next seating to reclaim lost capacity and increase daily turns.",
         footerLabel: "Throughput",
         footerValue: "+18%",
       },
       {
         title: "AI Owner Copilot",
-        description: "Unlock predictive staffing alerts, bottleneck forecasting, and automated off-peak LINE promotions.",
+        description:
+          "Unlock predictive staffing alerts, bottleneck forecasting, and automated off-peak LINE promotions.",
         footerLabel: "AI Copilot",
         footerValue: "Pro Tier",
       },
       {
         title: "Queue Autopilot",
-        description: "Automate table assignments by letting the system suggest the next optimal party for staff to confirm with a single tap.",
+        description:
+          "Automate table assignments by letting the system suggest the next optimal party for staff to confirm with a single tap.",
         footerLabel: "Staff taps",
         footerValue: "-80%",
       },
       {
         title: "Get Queue from Home",
-        description: "Allow guests to secure a spot in line remotely via mobile web, reducing physical host stand congestion and walkaways.",
+        description:
+          "Allow guests to secure a spot in line remotely via mobile web, reducing physical host stand congestion and walkaways.",
         footerLabel: "Status",
         footerValue: "Coming Soon",
-      }
-    ]
+      },
+    ],
   },
   branchModes: {
-    sectionLabel: "Branch floor modes",
-    title1: "Fixed tables or",
-    titleHighlight: "flexible seating",
+    sectionLabel: "Operating modes",
+    title1: "Choose your",
+    titleHighlight: "operating mode",
     subtitle:
-      "Every branch picks one mode at setup—table-mapped discipline or party-first flow for dynamic floors.",
+      "We support two floor modes—each branch picks one at setup. Choose the one that fits how you seat guests.",
     imageAlt: "MyTurn create-branch screen to choose Fixed mode or Flex mode",
     supportLine:
       "Dynamic seating with no table map? Flex mode keeps your queue structured and efficient—without Autopilot.",
@@ -147,35 +154,98 @@ export const en = {
       ],
       note: "Autopilot is not available in Flex mode; you still get an efficient, structured queue system.",
     },
+    comparison: {
+      intro:
+        "Every feature is designed to reduce friction and boost throughput. Here's how the two modes compare.",
+      columns: {
+        feature: "Feature",
+        flex: "Flex Mode",
+        fixed: "Fixed Mode",
+      },
+      included: "Included",
+      fullSuite: "Full Suite",
+      rows: [
+        {
+          feature: "Party-size queue",
+          flex: "included" as const,
+          fixed: "included" as const,
+        },
+        {
+          feature: "Auto-Pilot seating",
+          flex: "excluded" as const,
+          fixed: "included" as const,
+        },
+        {
+          feature: "Perfect table match",
+          flex: "excluded" as const,
+          fixed: "included" as const,
+        },
+        {
+          feature: "Live floor map",
+          flex: "excluded" as const,
+          fixed: "included" as const,
+        },
+        {
+          feature: "Advanced analytics",
+          flex: "fullSuite" as const,
+          fixed: "fullSuite" as const,
+        },
+        {
+          feature: "LINE & Telegram notifications",
+          flex: "included" as const,
+          fixed: "included" as const,
+        },
+      ],
+    },
   },
   howItWorks: {
     sectionLabel: "How It Works",
     title1: "4 Steps to",
     titleHighlight: "Total Floor Discipline",
     steps: [
-      { title: "Map Your Floor", description: "Quickly layout your table categories and exact capacities in minutes." },
-      { title: "Streamline the Queue", description: "Track waiting, dining, and ready states directly from a single intuitive dashboard." },
-      { title: "Algorithmic Seating", description: "Let our smart suggestion engine instantly seat the perfect party next." },
-      { title: "Capture Wasted Revenue", description: "Review idle gap metrics and unlock hidden capacity during every shift." }
-    ]
+      {
+        title: "Map Your Floor",
+        description:
+          "Quickly layout your table categories and exact capacities in minutes.",
+      },
+      {
+        title: "Streamline the Queue",
+        description:
+          "Track waiting, dining, and ready states directly from a single intuitive dashboard.",
+      },
+      {
+        title: "Algorithmic Seating",
+        description:
+          "Let our smart suggestion engine instantly seat the perfect party next.",
+      },
+      {
+        title: "Capture Wasted Revenue",
+        description:
+          "Review idle gap metrics and unlock hidden capacity during every shift.",
+      },
+    ],
   },
   globalSupport: {
     sectionLabel: "Global Support",
     title1: "Designed for",
     titleHighlight: "diverse venues",
-    subtitle: "Built to support multicultural operators while keeping guest check-ins friction-free.",
+    subtitle:
+      "Built to support multicultural operators while keeping guest check-ins friction-free.",
     features: [
       {
         title: "Multilingual Operator Panel",
-        description: "Staff can manage queues, table layouts, and settings in English, Thai, Simplified Chinese, or Traditional Chinese.",
+        description:
+          "Staff can manage queues, table layouts, and settings in English, Thai, Simplified Chinese, or Traditional Chinese.",
       },
       {
         title: "Web & LINE QR Check-In",
-        description: "Guests scan a QR code to check in instantly via any mobile browser or inside LINE. Zero friction, no app download.",
+        description:
+          "Guests scan a QR code to check in instantly via any mobile browser or inside LINE. Zero friction, no app download.",
       },
       {
         title: "Universal Queue Numbers",
-        description: "Guest-facing screens and notifications display numbers in English, ensuring clear communication with international tourists.",
+        description:
+          "Guest-facing screens and notifications display numbers in English, ensuring clear communication with international tourists.",
       },
     ],
   },
@@ -183,12 +253,22 @@ export const en = {
     sectionLabel: "Customer Communication",
     title1: "Connect on",
     titleHighlight: "LINE",
-    subtitle: "Queue updates in LINE—the channel your guests already check all day.",
+    subtitle:
+      "Queue updates in LINE—the channel your guests already check all day.",
     features: [
-      { title: "Live queue position", description: "Guests see place in line and ready-time estimates." },
-      { title: "Built for Thailand", description: "LINE is the default channel—no new habit to learn." },
-      { title: "Fewer no-shows", description: "Timely nudges keep parties showing up on time." }
-    ]
+      {
+        title: "Live queue position",
+        description: "Guests see place in line and ready-time estimates.",
+      },
+      {
+        title: "Built for Thailand",
+        description: "LINE is the default channel—no new habit to learn.",
+      },
+      {
+        title: "Fewer no-shows",
+        description: "Timely nudges keep parties showing up on time.",
+      },
+    ],
   },
   onboarding: {
     sectionLabel: "Lightning-Fast Deployment",
@@ -211,8 +291,7 @@ export const en = {
       {
         title: "Monetize the Idle Screen",
         subtitle: "TV Display Ads",
-        description:
-          "Play promos on waiting-area TVs when the queue is empty.",
+        description: "Play promos on waiting-area TVs when the queue is empty.",
       },
     ],
   },
@@ -232,7 +311,7 @@ export const en = {
     title1: "Simple Pricing.",
     titleHighlight: "Built to Scale with You.",
     subtitle:
-      "Per main branch. Expansion branches have no implementation fee. Save more with semi-annual or annual billing.",
+      "Per branch by mode. Save more with semi-annual or annual billing.",
     billingToggleLabel: "Billing period",
     billingMonthly: "Monthly",
     billingSemiAnnual: "Semi-Annual",
@@ -241,8 +320,8 @@ export const en = {
     semiAnnualBadge: "10% off",
     annualBadge: "Best value",
     perMonth: "/ mo",
-    mainBranchLabel: "Main branch",
-    expansionBranchLabel: "Expansion branch",
+    coreBranchLabel: "Core branch",
+    addonBranchLabel: "Add-on branch",
     billedYearly: "Billed {total} yearly",
     billedSemiAnnual: "Billed {total} every 6 months",
     savePerYear: "Save {amount} a year",
@@ -253,63 +332,52 @@ export const en = {
     viewAllFeatures: "View all features",
     hideFeatures: "Hide features",
     moreFeatures: "+ {count} more features",
-    recommendedLabel: "Recommended",
-    comingSoonLabel: "Coming Soon",
+    pricingModesBridge: "Not sure which mode fits?",
+    pricingModesBridgeLink: "Compare Flex and Fixed modes",
+    setupFeeCallout: "One-time setup · {core} core branch · {addon} add-on branch",
+    setupFeeCalloutNote: "Waived on annual billing",
     guarantee: {
       title: "Risk-Free Founder’s Promise",
       body: "We believe in the power of operational discipline for every rush. If you ever feel that MyTurn is not adding value to your restaurant, we offer a 100% money-back guarantee within the first 30 days. No questions asked. We’re here to help you succeed.",
     },
     plans: {
-      foundation: {
-        name: "Foundation (Operational Core)",
-        badge: "Foundation",
+      flex: {
+        name: "Flex Mode",
+        tagline: "Ideal for cafés & fast casual",
         description:
-          "The essential toolkit for managing waitlists and optimizing chair utilization.",
+          "Lightweight, agile operations with essential tools to keep service flowing smoothly.",
         features: [
+          { text: "Queue by party size—no fixed table assignment" },
+          { text: "Fast call-and-seat workflow for compact floors" },
           {
-            text: "Queue & Flow: Unlimited queues, Deterministic Table Matching, and BYOD hardware support.",
+            text: "LINE & Telegram notifications plus automated feedback tracking",
           },
-          {
-            text: "Customer Comms: LINE & Telegram notifications, plus automated feedback tracking.",
-          },
-          {
-            text: "Advanced Analytics: Nightly breakdown of peak-hour performance and idle gaps.",
-          },
-          {
-            text: "Complete Setup: Custom floor mapping, staff accounts, and 1-on-1 remote training included.",
-          },
+          { text: "Nightly peak-hour analytics and idle-gap reporting" },
           { text: "24/7 Support" },
         ],
-        recommended: true,
-        comingSoon: false,
         ctaLabel: "Book a Demo",
         trialSubtext:
-          "Start with Foundation on a 2-month free trial. Implementation fee & subscription apply only if you continue.",
+          "Start with a 1-month free trial on Flex mode. Setup fees and subscription apply only if you continue.",
         ctaVariant: "primary" as const,
       },
-      pro: {
-        name: "Pro (AI Copilot)",
-        badge: "AI Powered",
+      fixed: {
+        name: "Fixed Mode",
+        tagline: "Built for hotpot, BBQ & high-volume",
         description:
-          "Advanced analytics, predictive staffing, and automated demand generation for busy venues.",
+          "Advanced automation and table-level intelligence for complex, high-turnover dining.",
         features: [
-          { text: "Everything in Foundation, plus:" },
+          { text: "Full table mapping tied to party size (pax)" },
+          { text: "Smart seat matching and Queue Autopilot" },
           {
-            text: "Consultant AI & Predictive Forecasting: Smart peak-hour predictions, bottleneck prevention alerts, and data-driven operational suggestions.",
+            text: "LINE & Telegram notifications plus automated feedback tracking",
           },
-          {
-            text: "Predictive Staffing: AI-driven traffic spike alerts for kitchen prep.",
-          },
-          {
-            text: "Dynamic Off-Peak Triggers: Auto-send targeted LINE promotions when tables are empty.",
-          },
-          { text: "Priority 24/7 Support" },
+          { text: "Nightly peak-hour analytics and table-level insights" },
+          { text: "24/7 Support" },
         ],
-        recommended: false,
-        comingSoon: true,
-        ctaLabel: "Coming Soon",
-        trialSubtext: "",
-        ctaVariant: "secondary" as const,
+        ctaLabel: "Book a Demo",
+        trialSubtext:
+          "Start with a 1-month free trial on Fixed mode. Setup fees and subscription apply only if you continue.",
+        ctaVariant: "primary" as const,
       },
     },
   },
@@ -326,18 +394,25 @@ export const en = {
       "Walk away now and competitors tighten flow while you keep guessing",
     ],
     cta: "Take the 2-minute survey now",
-    urgencyNote: "Do it now. Waiting is choosing to lose money you can't see yet.",
-    contactHint: "Rather talk first? Book a demo below—we'll still ask what's breaking your floor.",
+    urgencyNote:
+      "Do it now. Waiting is choosing to lose money you can't see yet.",
+    contactHint:
+      "Rather talk first? Book a demo below—we'll still ask what's breaking your floor.",
   },
   closingCta: {
     sectionLabel: "Simple, per-branch monthly fee • Unlimited Seats",
     title1: "Ready to stop",
     titleHighlight: "losing capacity?",
-    subtitle: "Join top-tier restaurants using MyTurn to squeeze every dollar out of their peak hours.",
+    subtitle:
+      "Join top-tier restaurants using MyTurn to squeeze every dollar out of their peak hours.",
     bookDemo: "Book a Demo",
     contactSales: "Contact Sales",
-    trialText: "🚀 Start with a 2-month free trial.",
-    bullets: ["Unlimited seats & devices", "Cancel anytime", "24/7 priority support"],
+    trialText: "🚀 Start with a 1-month free trial.",
+    bullets: [
+      "Unlimited seats & devices",
+      "Cancel anytime",
+      "24/7 priority support",
+    ],
   },
   faq: {
     sectionLabel: "FAQ",
@@ -348,12 +423,13 @@ export const en = {
       {
         question: "What is the pricing structure?",
         answer:
-          "Foundation (Operational Core) starts at $49/mo for your main branch ($39/mo on annual billing). Pro (AI Copilot) starts at $89/mo ($75/mo annually) when available. A one-time $49 Implementation & Training Fee applies to the main branch only—waived on annual plans. Expansion branches have no implementation fee.",
+          "Flex mode starts at $39.99/mo per core branch ($29.99/mo add-ons). Fixed mode at $69.99/mo per core branch ($59.99/mo add-ons). Lower rates on semi-annual and annual billing. One-time setup: $49.99 for a core branch and $39.99 for each add-on branch—waived on annual plans.",
       },
       {
-        question: "Is the 2-month trial completely free, or do I pay the implementation fee upfront?",
+        question:
+          "Is the 1-month trial completely free, or do I pay the implementation fee upfront?",
         answer:
-          "Foundation’s 2-month trial is free. You are not charged the $49 Implementation & Training Fee or subscription unless you choose to continue. Annual subscribers also get that fee waived. Cancel during the trial and you pay nothing.",
+          "Foundation’s 1-month trial is free. You are not charged setup fees or subscription unless you choose to continue. Annual subscribers also get setup fees waived. Cancel during the trial and you pay nothing.",
       },
       {
         question: "Do I need to buy expensive kiosks or hardware?",
@@ -366,14 +442,15 @@ export const en = {
           "Yes. MyTurn fully integrates with LINE notifications and web-based queue tracking so customers can monitor their status anywhere, without needing to download a new app.",
       },
       {
-        question: "What if a customer doesn't have a smartphone to scan the QR code?",
+        question:
+          "What if a customer doesn't have a smartphone to scan the QR code?",
         answer:
           "No problem. Your host can manually enter their name and party size into the tablet. The customer can then simply relax and watch the waiting area TV display to see when their queue number is called.",
       },
       {
         question: "Can I manage multiple branches?",
         answer:
-          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. Expansion branches are $29/mo on Foundation and $59/mo on Pro (lower on semi-annual and annual billing)—with no implementation fee.",
+          "Absolutely. You can manage all your restaurant locations from one centralized master dashboard. Add-on branches are $29.99/mo in Flex mode or $59.99/mo in Fixed mode (lower on semi-annual and annual billing), with a one-time $39.99 setup fee each—waived on annual plans.",
       },
       {
         question: "Am I locked into a long-term contract?",
@@ -384,46 +461,53 @@ export const en = {
   },
   footer: {
     tagline: "Build the Hype. Hide the Wait. · MyTurn Engine",
-    description: "The Peak-Hour Revenue Optimization Engine for busy restaurants. Serve more customers, maximize every hour.",
+    description:
+      "The Peak-Hour Revenue Optimization Engine for busy restaurants. Serve more customers, maximize every hour.",
     companyName: "HawDi Technologies",
     address: "Bangkok, Thailand",
     hawdi: "A product of HawDi Technologies",
     columns: [
       { title: "Product", links: ["Features", "Pricing", "Book a Demo"] },
-      { title: "Resources", links: ["Help Center", "API Documentation", "System Status"] },
-      { title: "Company", links: ["About Us", "Contact", "Privacy Policy"] }
+      {
+        title: "Resources",
+        links: ["Help Center", "API Documentation", "System Status"],
+      },
+      { title: "Company", links: ["About Us", "Contact", "Privacy Policy"] },
     ],
     rights: "© 2026 HawDi Technologies. All rights reserved.",
     links: {
-      "Features": "Features",
+      Features: "Features",
       "How It Works": "How It Works",
-      "Pricing": "Pricing",
+      Pricing: "Pricing",
       "About Us": "About Us",
-      "Contact": "Contact",
+      Contact: "Contact",
       "Privacy Policy": "Privacy Policy",
       "Terms of Service": "Terms of Service",
-      "Cookie Settings": "Cookie Settings"
-    }
+      "Cookie Settings": "Cookie Settings",
+    },
   },
   modal: {
     tagline: "Build the Hype. Hide the Wait.",
     title1: "Book a",
     titleHighlight: "Demo",
-    subtitle: "See how MyTurn can maximize your table throughput and completely eliminate the idle gap.",
+    subtitle:
+      "See how MyTurn can maximize your table throughput and completely eliminate the idle gap.",
     successTitle: "Request Sent!",
-    successDesc: "We'll be in touch shortly to schedule your personalized demo.",
+    successDesc:
+      "We'll be in touch shortly to schedule your personalized demo.",
     fullName: "Full Name",
     email: "Work Email",
     restaurant: "Restaurant Name",
     message: "How can we help?",
     submit: "Request Demo",
-    error: "Failed to send the request. Please try again later."
+    error: "Failed to send the request. Please try again later.",
   },
   about: {
     sectionLabel: "The Team",
     title1: "Meet the",
     titleHighlight: "Builders",
-    subtitle: "We are the founders and engineers obsessed with solving restaurant capacity problems.",
+    subtitle:
+      "We are the founders and engineers obsessed with solving restaurant capacity problems.",
     roles: {
       ceo: "CEO\nFullstack Developer",
       coo: "COO\nTest Automation Lead",
